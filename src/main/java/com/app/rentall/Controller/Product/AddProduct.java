@@ -22,6 +22,7 @@ public class AddProduct extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+// demo comment to push
 
         String prod_title = request.getParameter("prod_title");
         System.out.println(request.getParameter("prod_title"));
