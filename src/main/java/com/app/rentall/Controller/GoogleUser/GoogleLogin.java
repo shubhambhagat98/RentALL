@@ -15,7 +15,7 @@ public class GoogleLogin extends HttpServlet {
     static String type = "GoogleLogin";
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 
     @Override
