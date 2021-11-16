@@ -21,7 +21,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="986571061196-flj7n9ugit4okm866o9utn6eakp3ng32.apps.googleusercontent.com"/>
+    <meta name="google-signin-client_id" content="359199286110-30sbl7a4t5qc2do4javmsm8se8g33jms.apps.googleusercontent.com"/>
     <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
     <script type="application/javascript" src="JS/signout.js"></script>
     <script type="application/javascript" src="JS/signin.js"></script>
