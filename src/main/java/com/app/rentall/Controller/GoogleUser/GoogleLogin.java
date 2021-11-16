@@ -42,6 +42,7 @@ public class GoogleLogin extends HttpServlet {
                 session.setAttribute("last_name", checkedUser.getLast_name());
                 session.setAttribute("email_id", checkedUser.getEmail_id());
                 session.setAttribute("type", checkedUser.getType());
+                System.out.println(checkedUser);
                 response.sendRedirect("index.jsp");
             } else {
 
