@@ -1,3 +1,5 @@
+console.log("file loaded",$)
+
 $.fn.stars = function() {
     return $(this).each(function() {
         const rating = $(this).data("rating");
