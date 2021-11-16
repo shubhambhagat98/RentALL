@@ -1,4 +1,5 @@
 package com.app.rentall.DBUtil;
+import java.net.URI;
 import java.sql.*;
 
 public class DBUtil {
@@ -9,12 +10,17 @@ public class DBUtil {
         try {
             //Driver class loader
             Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost:3306/rentall";
-            String username = "root";
-            String password = "Shivoham@8089";
+//            String url = "jdbc:mysql://localhost:3306/rentall";
+//            String username = "root";
+//            String password = "Shivoham@8089";
+            URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
+
+            String username = dbUri.getUserInfo().split(":")[0];
+            String password = dbUri.getUserInfo().split(":")[1];
+            String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
 
             //create connection
-            con = DriverManager.getConnection(url, username, password);
+            con = DriverManager.getConnection(dbUrl, username, password);
 //            System.out.println("Connection established!!");
 
         }catch (Exception e){
