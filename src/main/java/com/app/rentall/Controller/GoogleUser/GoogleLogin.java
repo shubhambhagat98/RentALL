@@ -21,6 +21,8 @@ public class GoogleLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            HttpSession session = request.getSession();
+            session.invalidate();
             String id_token = request.getParameter("id_token");
             GoogleIdToken.Payload payload = IdTokenVerifierAndParser.getPayload(id_token);
             String name = (String) payload.get("name");
@@ -33,8 +35,7 @@ public class GoogleLogin extends HttpServlet {
             String last_name = name.split(" ")[1];
 
             User checkedUser = GoogleLoginDAO.checkUser(email_id, first_name, last_name, type);
-            HttpSession session = request.getSession();
-            session.invalidate();
+
             session = request.getSession(true);
             if (checkedUser != null){
 //                session.setAttribute("user_id", checkedUser.getUser_id());
