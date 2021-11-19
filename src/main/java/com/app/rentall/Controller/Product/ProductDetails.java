@@ -45,6 +45,8 @@ public class ProductDetails extends HttpServlet {
 
 
         if (request.getParameter("action").equals("availableProduct")){
+
+            System.out.println("product rating:"+product.getProd_rating());
             request.setAttribute("product", product);
             request.setAttribute("seller", seller);
             request.setAttribute("imageFileList", imageFileList);

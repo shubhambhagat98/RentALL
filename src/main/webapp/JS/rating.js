@@ -10,3 +10,5 @@ $.fn.stars = function() {
         $(this).html(`${fullStar}${halfStar}${noStar}`);
     });
 }
+
+

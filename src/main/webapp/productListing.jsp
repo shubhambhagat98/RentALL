@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -75,7 +76,10 @@
                                             <h5 class="card-title mt-3 mb-2">${product.prod_title}</h5>
                                                 <%--                                            <h6 class="card-subtitle text-muted">Category: ${product.prod_category}</h6>--%>
                                             <h6 class="card-subtitle text-muted">Category: ${product.prod_category}</h6>
-                                            <div class=" d-block mt-2"><span class="stars" data-rating="3.5" data-num-stars="5" ></span></div>
+<%--                                            <c:if test="${product.prod_rating > 0.0}">--%>
+                                                <div class="mt-2"><span class="stars" data-rating="${product.prod_rating}" data-num-stars="5" ></span></div>
+<%--                                            </c:if>--%>
+
                                             <div class = "mt-2">
                                                 <div  style="display:inline-block; vertical-align:middle;">
                                                     <span class = "float-start product-price" >

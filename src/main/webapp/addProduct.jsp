@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 
@@ -56,23 +57,34 @@
 
 
                 <div class="row mb-3 g-2">
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-4 col-sm-12">
                         <div class="form-outline">
                             <select class="form-select" aria-label="Default select example" id="prod_category" name="prod_category">
                                 <option id="no-category" value="none" selected="selected">Select category</option>
-                                <option value="car">Car</option>
-                                <option value="bike">Bike</option>
-                                <option value="two wheeler">Two Wheeler</option>
-                                <option value="boat">Boat</option>
-                                <option value="services">Services</option>
-                                <option value="apartment">Apartment</option>
-                                <option value="party hall">Party Hall</option>
-                                <option value="other">Other</option>
+                                <option value="Car">Car</option>
+                                <option value="Bike">Bike</option>
+                                <option value="Two Wheeler">Two Wheeler</option>
+                                <option value="Boat">Boat</option>
+                                <option value="Services">Services</option>
+                                <option value="Apartment">Apartment</option>
+                                <option value="Party hall">Party Hall</option>
+                                <option value="Other">Other</option>
                             </select>
                             <small class="text-danger float-start" id="categoryError"></small>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-12">
+                    <div class="col-md-4 col-sm-12">
+                        <div class="form-outline">
+                            <select class="form-select" aria-label="Default select example" id="prod_duration" name="prod_duration">
+                                <option id="no-duration" value="none" selected="selected">Select Duration</option>
+                                <option value="Day">Per Day</option>
+                                <option value="Week">Per Week</option>
+                                <option value="Month">Per Month</option>
+                            </select>
+                            <small class="text-danger float-start" id="durationError"></small>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
                         <div class="form-outline">
                             <div class="input-group ">
                                 <span class="input-group-text" style="background: none; ">$</span>

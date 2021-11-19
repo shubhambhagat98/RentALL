@@ -128,7 +128,7 @@ function validateContact(field)
         document.getElementById("contactError").innerHTML = "Only digits allowed in contact number";
         errorCount ++;
     }
-    else if (field.length < 10){
+    else if (field.length < 10 || field.length >10){
         document.getElementById("contactError").innerHTML = "Enter valid contact number";
         errorCount ++;
     }

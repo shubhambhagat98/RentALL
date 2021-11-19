@@ -28,6 +28,7 @@ public class AddProduct extends HttpServlet {
         System.out.println(request.getParameter("prod_title"));
         String prod_description = request.getParameter("prod_description");
         String prod_category = request.getParameter("prod_category");
+        String prod_duration = request.getParameter("prod_duration");
         System.out.println(request.getParameter("prod_price"));
         int prod_price = Integer.parseInt(request.getParameter("prod_price"));
         String prod_street_address = request.getParameter("street_address");
@@ -50,6 +51,7 @@ public class AddProduct extends HttpServlet {
         product.setProd_title(prod_title);
         product.setProd_description(prod_description);
         product.setProd_category(prod_category);
+        product.setProd_duration(prod_duration);
         product.setProd_price(prod_price);
         product.setProd_street_address(prod_street_address);
         product.setProd_city(prod_city);

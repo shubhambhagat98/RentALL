@@ -500,6 +500,11 @@ span.banner-subtitle{
     padding-top: 5px;
 }
 
+.single-product .duration{
+    font-size: 18px;
+    padding-top: 5px;
+}
+
 .single-product .info{
     font-size: 20px;
 }
@@ -558,4 +563,23 @@ span.banner-subtitle{
     color: #fff;
     border: none;
     /*text-shadow: 2px 2px 2px rgba(0,2,0,0.6);*/
+}
+
+
+
+
+/*review's rating*/
+.modal .modal-dialog .modal-content .rating {
+    cursor: pointer;
+}
+
+.modal .modal-dialog .modal-content .rating .rating-star {
+    display: inline-block;
+    position: relative;
+    padding-right: 5px;
+    margin-left: -5px;
+    color: orange;
+}
+.modal .modal-dialog .modal-content .rating .selected:before {
+    content: '\f005';
 }

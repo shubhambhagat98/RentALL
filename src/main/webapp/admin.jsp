@@ -67,6 +67,7 @@
                                                     <h5 class="card-title mt-3 mb-2">${product.prod_title}</h5>
                                                     <h6 class="card-subtitle text-muted">Category: ${product.prod_category}</h6>
 <%--                                                    <h6 class="card-subtitle text-muted">Status: ${product.prod_status}</h6>--%>
+
                                                     <div class = "mt-2">
                                                         <div  style="display:inline-block; vertical-align:middle;">
                                                     <span class = "float-start product-price" >

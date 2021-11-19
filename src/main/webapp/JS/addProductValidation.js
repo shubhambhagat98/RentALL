@@ -3,6 +3,7 @@ function addProductValidate(){
     document.getElementById("prodTitleError").innerHTML = "";
     document.getElementById("prodDescriptionError").innerHTML = "";
     document.getElementById("categoryError").innerHTML = "";
+    document.getElementById("durationError").innerHTML = "";
     document.getElementById("priceError").innerHTML = "";
     document.getElementById("streetAddressError").innerHTML = "";
     document.getElementById("stateError").innerHTML = "";
@@ -16,6 +17,7 @@ function addProductValidate(){
     validateProdTitle(document.forms["addProduct"]["prod_title"].value)
     validateProdDescription(document.forms["addProduct"]["prod_description"].value)
     validateCategory(document.forms["addProduct"]["prod_category"].value)
+    validateDuration(document.forms["addProduct"]["prod_duration"].value)
     validatePrice(document.forms["addProduct"]["prod_price"].value)
     validateStreetAddress(document.forms["addProduct"]["street_address"].value)
     validateStateCity(document.forms["addProduct"]["state"].value, document.forms["addProduct"]["city"].value)
@@ -58,6 +60,17 @@ function validateCategory(field){
     console.log(field);
 
 }
+
+
+// check product duration
+function validateDuration(field){
+    if (field === "none") {
+        document.getElementById("durationError").innerHTML = "Please select a duration";
+        errorCount ++;
+    }
+    console.log("inside product duration "+field);
+}
+
 
 // check price
 function validatePrice(field){

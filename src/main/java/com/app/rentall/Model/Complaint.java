@@ -1,21 +1,23 @@
 package com.app.rentall.Model;
 
-import java.util.Date;
-
 public class Complaint {
     private User renter;
     private User seller;
     private String description;
-    private Date date;
+    private String date;
     private Product product;
 
 
-    public Complaint(User renter, User seller, String description, Date date, Product product) {
+    public Complaint(User renter, User seller, String description, String date, Product product) {
         this.renter = renter;
         this.seller = seller;
         this.description = description;
         this.date = date;
         this.product = product;
+    }
+
+    public Complaint(){
+
     }
 
     public User getRenter() {
@@ -42,11 +44,11 @@ public class Complaint {
         this.description = description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

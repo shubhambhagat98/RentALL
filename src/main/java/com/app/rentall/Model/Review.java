@@ -1,18 +1,16 @@
 package com.app.rentall.Model;
 
-import java.util.Date;
-
 public class Review {
 
     private int review_id;
     private String review_title;
     private String review_description;
-    private float review_rating;
-    private Date review_date;
+    private int review_rating;
+    private String review_date;
     private int product_id;
     private String reviewer_name;
 
-    public Review(int review_id, String review_title, String review_description, float review_rating, Date review_date, int product_id, String reviewer_name) {
+    public Review(int review_id, String review_title, String review_description, int review_rating, String review_date, int product_id, String reviewer_name) {
         this.review_id = review_id;
         this.review_title = review_title;
         this.review_description = review_description;
@@ -20,6 +18,9 @@ public class Review {
         this.review_date = review_date;
         this.product_id = product_id;
         this.reviewer_name = reviewer_name;
+    }
+
+    public Review() {
     }
 
     public int getReview_id() {
@@ -46,19 +47,19 @@ public class Review {
         this.review_description = review_description;
     }
 
-    public float getReview_rating() {
+    public int getReview_rating() {
         return review_rating;
     }
 
-    public void setReview_rating(float review_rating) {
+    public void setReview_rating(int review_rating) {
         this.review_rating = review_rating;
     }
 
-    public Date getReview_date() {
+    public String getReview_date() {
         return review_date;
     }
 
-    public void setReview_date(Date review_date) {
+    public void setReview_date(String review_date) {
         this.review_date = review_date;
     }
 

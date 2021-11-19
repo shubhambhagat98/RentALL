@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,6 +26,9 @@
     <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
     <script type="application/javascript" src="JS/signout.js"></script>
     <script type="application/javascript" src="JS/rating.js"></script>
+    <script type="application/javascript" src="JS/reviewRating.js"></script>
+    <script type="application/javascript" src="JS/reviewValidation.js"></script>
+    <script type="application/javascript" src="JS/rentValidation.js"></script>
     <script>
         $(function() {
             console.log("inside ")
@@ -48,6 +53,7 @@
                 minDate:0,
                 onSelect: function( selectedDate ) {
                     $( "#to" ).datepicker( "option", "minDate", selectedDate );
+                    callCalTotalCost();
                 }
             });
         });
@@ -63,9 +69,20 @@
                 minDate:0,
                 onSelect: function( selectedDate ) {
                     $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+                    callCalTotalCost();
                 }
             });
         });
+
+        function callCalTotalCost(){
+            console.log("hello---------")
+            calTotalCost('${requestScope.product.prod_duration}', '${requestScope.product.prod_price}')
+        }
+
+
+
+
+
 
 
     </script>
@@ -79,15 +96,16 @@
             <div class="container">
                 <h2>Product Details</h2>
                 <ul>
-                    <c:if test="${(sessionScope.type == 'GoogleLogin') or (sessionScope.type == 'DBLogin')}">
-                        <li><a class="nav-link" href="viewProfile.jsp">View Profile</a></li>
+                    <c:if test="${((sessionScope.type == 'GoogleLogin') or (sessionScope.type == 'DBLogin')) and (sessionScope.user_id != requestScope.product.user_id)}">
+                        <li><button type="button" class="btn btn-primary nav-link" data-bs-toggle="modal" data-bs-target="#AddReviewModal" style="border:none">Add Review</button></li>
+                        <li><button type="button" class="btn btn-primary nav-link" data-bs-toggle="modal" data-bs-target="#AddComplaintModal" style="border:none">Submit Complaint</button></li>
+                    </c:if>
+                    <c:if test="${((sessionScope.type == 'GoogleLogin') or (sessionScope.type == 'DBLogin')) and (sessionScope.user_id == requestScope.product.user_id)}">
+                        <li><a class="nav-link" href="${pageContext.request.contextPath}/ProductListing?action=allProducts">All Products</a></li>
                     </c:if>
                     <c:if test="${(sessionScope.type == 'admin')}">
                         <li><a class="nav-link " href="${pageContext.request.contextPath}/Admin?adminQuery=productList">Admin Page</a></li>
                     </c:if>
-
-                    <%--                    add button to redirect to productlisting page--%>
-                    <li><a class="nav-link" href="${pageContext.request.contextPath}/ProductListing?action=allProducts">All Products</a></li>
                 </ul>
             </div>
         </div>
@@ -135,8 +153,12 @@
                 <div class="product-info">
                     <div ><span class="product-title">${requestScope.product.prod_title}</span></div>
                     <%--                put if condition to display rating--%>
-                    <div class="mt-2"><span class="stars" data-rating="3.5" data-num-stars="5" ></span></div>
-                    <div class="mt-2"><span class="price">Price $${requestScope.product.prod_price}.00</span></div>
+                    <c:if test="${requestScope.product.prod_rating > 0.0}">
+                        <div class="mt-2"><span class="stars" data-rating="${requestScope.product.prod_rating}" data-num-stars="5" ></span></div>
+                    </c:if>
+
+
+                    <div class="mt-2"><span class="price">Price $${requestScope.product.prod_price}.00</span> <span class="duration">/${requestScope.product.prod_duration}</span></div>
                     <div class="mt-2"><span class="info"><b>Category:</b> ${requestScope.product.prod_category}</span></div>
                     <div class="mt-2"><span class="info"><b>Status:</b> ${requestScope.product.prod_status}</span></div>
                     <div class="mt-2 mb-2">
@@ -144,6 +166,7 @@
                         <span class="d-block info"><b>Name:</b> ${requestScope.seller.first_name} ${requestScope.seller.last_name}</span>
                         <span class="info"><b>Contact:</b> ${requestScope.seller.email_id}</span>
                     </div>
+
 
                     <c:choose>
                         <c:when test="${( not empty sessionScope.user_id) and (sessionScope.type == 'admin')}">
@@ -248,7 +271,7 @@
 <div class="modal fade" id="RentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <form action="${pageContext.request.contextPath}/RentProduct" method="post">
+            <form action="${pageContext.request.contextPath}/RentProduct" method="post" onsubmit="return rentValidate()">
                 <div class="modal-header">
                     <h5 class="modal-title" id="RentModalTitle">Rent Product</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -260,8 +283,9 @@
                         <div class="col-6 d-block">
                             <span  style="display:inline-block; vertical-align:middle;">Select start date:</span>
                             <div class="input-group input-append date"  >
-                                <input type="text" name="startDate" class="form-control float-start" style="border-right: none " id="from" placeholder="click here">
+                                <input type="text"  name="startDate" class="form-control float-start" style="border-right: none " id="from" placeholder="click here">
                                 <span class="input-group-text" style="background: none; border-left: none" ><i class="fa fa-calendar" style="cursor:pointer; background: none" ></i></span>
+                                <small class="text-danger float-start" id="startDateError"></small>
                             </div>
                         </div>
                         <div class="col-6 d-block">
@@ -270,7 +294,12 @@
                                 <input type="text" name="endDate" class="form-control float-start" style="border-right: none " id="to" placeholder="click here">
                                 <span class="input-group-text" style="background: none; border-left: none" ><i class="fa fa-calendar" style="cursor:pointer; background: none" ></i></span>
                             </div>
+                            <small class="d-block text-danger float-start" id="endDateError"></small>
                         </div>
+                    </div>
+                    <div class="mt-2">
+                        <span style="font-size: 22px" >Total Renting Price: </span><span id="total_price1" style="font-weight: bold; font-size: 22px; color: #043c88;"></span>
+                        <input type="hidden" name="total_cost" id="total_price2" >
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -282,6 +311,104 @@
         </div>
     </div>
 </div>
+
+
+<%--add review modal--%>
+<div class="modal fade" id="AddReviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="${pageContext.request.contextPath}/AddReview" name="reviewForm" method="post" onsubmit="return reviewValidate()">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddReviewTitle">Add Review</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <%-- prod id hidden input --%>
+                    <input type="hidden" value="${requestScope.product.prod_id}" name="product_id">
+                    <input type="hidden" name="review_date" id="review_date">
+                    <input type="hidden" name="prev_action" value="availableProduct">
+                        <div class="form-outline mb-4">
+                            <input type="text" class="form-control" placeholder="Review Title" id="review_title" name="review_title">
+                            <small class="text-danger float-start" id="reviewTitleError"></small>
+                        </div>
+
+                        <div class="form-outline mb-3">
+                            <input type="hidden" name="rating" id="rating-input" min="1" max="5" />
+                            <span >Select rating: </span>
+
+                            <div class="rating ms-1" role="optgroup" id="ratingStarGroup">
+                                <!-- in Rails just use 1.upto(5) -->
+                                <i class="fa fa-star-o fa-2x rating-star" id="rating-1" data-rating="1" tabindex="0" aria-label="Rate as one out of 5 stars" role="radio"></i>
+                                <i class="fa fa-star-o fa-2x rating-star" id="rating-2" data-rating="2" tabindex="0" aria-label="Rate as two out of 5 stars" role="radio"></i>
+                                <i class="fa fa-star-o fa-2x rating-star" id="rating-3" data-rating="3" tabindex="0" aria-label="Rate as three out of 5 stars" role="radio"></i>
+                                <i class="fa fa-star-o fa-2x rating-star" id="rating-4" data-rating="4" tabindex="0" aria-label="Rate as four out of 5 stars" role="radio"></i>
+                                <i class="fa fa-star-o fa-2x rating-star" id="rating-5" data-rating="5" tabindex="0" aria-label="Rate as five out of 5 stars" role="radio"></i>
+                            </div>
+                            <small class="text-danger float-start" id="reviewRatingError"></small>
+
+                        </div>
+
+
+
+                        <div class="form-outline mb-3">
+                            <textarea class="form-control"  rows="3" placeholder="Review Description" id="review_description" name="review_description"></textarea>
+                            <small class="text-danger float-start" id="reviewDescriptionError"></small>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" >Submit</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+<%--add complaint modal--%>
+<div class="modal fade" id="AddComplaintModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="${pageContext.request.contextPath}/AddComplaint" name="complaintForm" method="post" onsubmit="return complaintValidate()">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddComplaintTitle">Submit Complaint</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <%-- prod id hidden input --%>
+                    <input type="hidden" value="${requestScope.product.prod_id}" name="product_id">
+                    <%-- seller id hidden input--%>
+                    <input type="hidden" value="${requestScope.seller.user_id}" name="seller_id">
+                    <%--     Complaint Date--%>
+                    <input type="hidden" name="complaint_date" id="complaint_date">
+                    <input type="hidden" name="prev_action" value="availableProduct">
+
+                    <div class="form-outline mb-3">
+                        <textarea class="form-control"  rows="5" placeholder="Complaint Description" id="complaint_description" name="complaint_description"></textarea>
+                        <small class="text-danger float-start" id="complaintDescriptionError"></small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" >Submit</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
 
 <div class="mt-3">
     <section class="product-description mt-2">
@@ -327,5 +454,13 @@
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMBgnNGsl68y8KN5ATgoj_GlvI58NFDE8&callback=myMap"></script>
+
+<script>
+    $(document).ready(function () {
+        console.log("rating= "+parseFloat('${requestScope.product.prod_rating}'))
+        console.log('${requestScope.product.prod_duration}')
+    });
+
+</script>
 </body>
 </html>

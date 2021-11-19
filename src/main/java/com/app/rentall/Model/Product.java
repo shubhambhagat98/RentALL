@@ -15,11 +15,12 @@ public class Product {
     private String prod_firstImage;
     private int user_id;
     private float prod_rating;
+    private String prod_duration;
 
     public Product() {
     }
 
-    public Product(int prod_id, String prod_title, String prod_description, String prod_category, int prod_price, String prod_street_address, String prod_city, String prod_state, int prod_pincode, String prod_status, String prod_firstImage, int user_id) {
+    public Product(int prod_id, String prod_title, String prod_description, String prod_category, int prod_price, String prod_street_address, String prod_city, String prod_state, int prod_pincode, String prod_status, String prod_firstImage, int user_id, String prod_duration) {
         this.prod_id = prod_id;
         this.prod_title = prod_title;
         this.prod_description = prod_description;
@@ -32,10 +33,11 @@ public class Product {
         this.prod_status = prod_status;
         this.prod_firstImage = prod_firstImage;
         this.user_id = user_id;
+        this.prod_duration = prod_duration;
     }
 
     // constructor to insert product
-    public Product(String prod_title, String prod_description, String prod_category, int prod_price, String prod_street_address, String prod_city, String prod_state, int prod_pincode, String prod_status, int user_id) {
+    public Product(String prod_title, String prod_description, String prod_category, int prod_price, String prod_street_address, String prod_city, String prod_state, int prod_pincode, String prod_status, int user_id, String prod_duration) {
         this.prod_title = prod_title;
         this.prod_description = prod_description;
         this.prod_category = prod_category;
@@ -46,10 +48,11 @@ public class Product {
         this.prod_pincode = prod_pincode;
         this.prod_status = prod_status;
         this.user_id = user_id;
+        this.prod_duration = prod_duration;
     }
 
     // constructor to retrieve product
-    public Product(int prod_id, String prod_title, String prod_description, String prod_category, int prod_price, String prod_street_address, String prod_city, String prod_state, int prod_pincode, String prod_status, String prod_firstImage, int user_id, float prod_rating) {
+    public Product(int prod_id, String prod_title, String prod_description, String prod_category, int prod_price, String prod_street_address, String prod_city, String prod_state, int prod_pincode, String prod_status, String prod_firstImage, int user_id, float prod_rating, String prod_duration) {
         this.prod_id = prod_id;
         this.prod_title = prod_title;
         this.prod_description = prod_description;
@@ -63,6 +66,7 @@ public class Product {
         this.prod_firstImage = prod_firstImage;
         this.user_id = user_id;
         this.prod_rating = prod_rating;
+        this.prod_duration = prod_duration;
     }
 
     public int getProd_id() {
@@ -186,6 +190,14 @@ public class Product {
                 ", user_id=" + user_id +
                 ", prod_rating=" + prod_rating +
                 '}';
+    }
+
+    public String getProd_duration() {
+        return prod_duration;
+    }
+
+    public void setProd_duration(String prod_duration) {
+        this.prod_duration = prod_duration;
     }
 }
 

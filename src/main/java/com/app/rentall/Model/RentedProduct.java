@@ -5,20 +5,23 @@ public class RentedProduct {
     private int user_id;
     private String start_date;
     private String end_date;
+    private float total_cost;
     private String Status;
 
-    public RentedProduct(int prod_id, int user_id, String start_date, String end_date, String status) {
+    public RentedProduct(int prod_id, int user_id, String start_date, String end_date, float total_cost, String status) {
         this.prod_id = prod_id;
         this.user_id = user_id;
         this.start_date = start_date;
         this.end_date = end_date;
+        this.total_cost = total_cost;
         Status = status;
     }
 
-    public RentedProduct(int prod_id, String start_date, String end_date, String status) {
+    public RentedProduct(int prod_id, String start_date, String end_date, float total_cost, String status) {
         this.prod_id = prod_id;
         this.start_date = start_date;
         this.end_date = end_date;
+        this.total_cost = total_cost;
         Status = status;
     }
 
@@ -71,5 +74,13 @@ public class RentedProduct {
                 ", end_date=" + end_date +
                 ", Status='" + Status + '\'' +
                 '}';
+    }
+
+    public float getTotal_cost() {
+        return total_cost;
+    }
+
+    public void setTotal_cost(float total_cost) {
+        this.total_cost = total_cost;
     }
 }

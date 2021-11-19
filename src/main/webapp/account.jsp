@@ -21,6 +21,14 @@
     <script type="application/javascript" src="JS/signout.js"></script>
     <script src="JS/rating.js"></script>
     <title>rentall</title>
+
+    <script>
+
+        $(function() {
+            $('.stars').stars();
+        });
+
+    </script>
 </head>
 <body>
 
@@ -61,6 +69,9 @@
                                             <h5 class="card-title mt-3 mb-2">${product.prod_title}</h5>
 <%--                                            <h6 class="card-subtitle text-muted">Category: ${product.prod_category}</h6>--%>
                                             <h6 class="card-subtitle text-muted">Status: ${product.prod_status}</h6>
+                                            <c:if test="${product.prod_rating > 0.0}">
+                                                <div class="mt-2"><span class="stars" data-rating="${product.prod_rating}" data-num-stars="5" ></span></div>
+                                            </c:if>
                                             <div class = "mt-2">
                                                 <div  style="display:inline-block; vertical-align:middle;">
                                                     <span class = "float-start product-price" >
@@ -108,6 +119,9 @@
                                             <h5 class="card-title mt-3 mb-2">${product.prod_title}</h5>
                                                 <%--                                            <h6 class="card-subtitle text-muted">Category: ${product.prod_category}</h6>--%>
                                             <h6 class="card-subtitle text-muted">Status: ${product.prod_status}</h6>
+<%--                                            <c:if test="${product.prod_rating > 0.0}">--%>
+                                                <div class="mt-2"><span class="stars" data-rating="${product.prod_rating}" data-num-stars="5" ></span></div>
+<%--                                            </c:if>--%>
                                             <div class = "mt-2">
                                                 <div  style="display:inline-block; vertical-align:middle;">
                                                     <span class = "float-start product-price" >

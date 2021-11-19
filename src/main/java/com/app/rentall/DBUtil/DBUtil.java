@@ -10,7 +10,7 @@ public class DBUtil {
         try {
             //Driver class loader
             Class.forName("com.mysql.cj.jdbc.Driver");
-//            String url = "jdbc:mysql://localhost:3306/rentall";
+//            String dbUrl = "jdbc:mysql://localhost:3306/rentall";
 //            String username = "root";
 //            String password = "Shivoham@8089";
             System.out.println(System.getenv("CLEARDB_DATABASE_URL"));
@@ -21,8 +21,8 @@ public class DBUtil {
             String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
 
             //create connection
+                con = DriverManager.getConnection(dbUrl, username, password);
 //            con = DriverManager.getConnection(dbUrl, username, password);
-            con = DriverManager.getConnection(dbUrl, username, password);
 //            System.out.println("Connection established!!");
 
         }catch (Exception e){
