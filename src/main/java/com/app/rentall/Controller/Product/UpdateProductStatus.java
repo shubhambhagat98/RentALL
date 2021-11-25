@@ -27,6 +27,11 @@ public class UpdateProductStatus extends HttpServlet {
         } else if (action.equals("NotApprove")){
             int status = ProductDAO.updateProductStatus(product_id, "Not Approved");
             response.sendRedirect(request.getContextPath()+"/ProductDetails?action=notApprovedProduct&product_id="+product_id);
+        } else if (action.equals("FinishRenting")){
+            int user_id = Integer.parseInt(String.valueOf(request.getSession().getAttribute("user_id")));
+            int status1 = ProductDAO.updateProductStatus(product_id, "Available");
+            int status2 = ProductDAO.updateRentedProductStatus(product_id, user_id, "close");
+            response.sendRedirect(request.getContextPath()+"/MyAccount");
         }
 
 

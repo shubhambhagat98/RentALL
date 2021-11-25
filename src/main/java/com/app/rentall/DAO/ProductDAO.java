@@ -9,6 +9,7 @@ import com.app.rentall.Model.Review;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 public class ProductDAO {
@@ -60,6 +61,81 @@ public class ProductDAO {
             con = DBUtil.getConnection();
             String selectQuery = "select * from product where prod_status = 'Available' ";
             ps = con.prepareStatement(selectQuery);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Product product = new Product();
+                product.setProd_id(rs.getInt("prod_id"));
+                product.setProd_title(rs.getString("prod_title"));
+                product.setProd_description(rs.getString("prod_description"));
+                product.setProd_category(rs.getString("prod_category"));
+                product.setProd_duration(rs.getString("prod_duration"));
+                product.setProd_price(rs.getInt("prod_price"));
+                product.setProd_street_address(rs.getString("prod_street_address"));
+                product.setProd_city(rs.getString("prod_city"));
+                product.setProd_state(rs.getString("prod_state"));
+                product.setProd_pincode(rs.getInt("prod_pincode"));
+                product.setProd_status(rs.getString("prod_status"));
+                product.setUser_id(rs.getInt("user_id"));
+                product.setProd_firstImage(getFirstImage(rs.getInt("prod_id")));
+                product.setProd_rating(getAverageRating(rs.getInt("prod_id")));
+                productList.add(product);
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeConnection(con);
+        }
+        return productList;
+    }
+
+
+    //get products based on category
+    public static List<Product> getProductsByCategory(String category){
+        List<Product> productList = new ArrayList<Product>();
+        try {
+            con = DBUtil.getConnection();
+            String selectQuery = "select * from product where prod_status = 'Available' and prod_category = ?";
+            ps = con.prepareStatement(selectQuery);
+            ps.setString(1, category);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Product product = new Product();
+                product.setProd_id(rs.getInt("prod_id"));
+                product.setProd_title(rs.getString("prod_title"));
+                product.setProd_description(rs.getString("prod_description"));
+                product.setProd_category(rs.getString("prod_category"));
+                product.setProd_duration(rs.getString("prod_duration"));
+                product.setProd_price(rs.getInt("prod_price"));
+                product.setProd_street_address(rs.getString("prod_street_address"));
+                product.setProd_city(rs.getString("prod_city"));
+                product.setProd_state(rs.getString("prod_state"));
+                product.setProd_pincode(rs.getInt("prod_pincode"));
+                product.setProd_status(rs.getString("prod_status"));
+                product.setUser_id(rs.getInt("user_id"));
+                product.setProd_firstImage(getFirstImage(rs.getInt("prod_id")));
+                product.setProd_rating(getAverageRating(rs.getInt("prod_id")));
+                productList.add(product);
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeConnection(con);
+        }
+        return productList;
+    }
+
+    // get products based on keyword
+    public static List<Product> getProductsByKeyword(String keyword){
+        List<Product> productList = new ArrayList<Product>();
+        try {
+            con = DBUtil.getConnection();
+            String selectQuery = "select * from product where prod_status = 'Available' and (prod_category like ? or prod_title like ? or prod_description like ?)" ;
+            ps = con.prepareStatement(selectQuery);
+            ps.setString(1, "%"+keyword+"%");
+            ps.setString(2, "%"+keyword+"%");
+            ps.setString(3, "%"+keyword+"%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 Product product = new Product();
@@ -359,6 +435,8 @@ public class ProductDAO {
         return productList;
     }
 
+
+
     //get rented product details
     public static RentedProduct getRentedProductDetails(int prod_id){
 
@@ -401,6 +479,27 @@ public class ProductDAO {
         }finally {
             DBUtil.closeConnection(con);
         }
+        return status;
+    }
+
+
+    //update rent status
+    public static int updateRentedProductStatus(int prod_id, int user_id, String prod_status){
+        int status = 0;
+        try {
+            con = DBUtil.getConnection();
+            String updateQuery = "update rented_products set status = ? where prod_id = ? and user_id = ?";
+            ps = con.prepareStatement(updateQuery);
+            ps.setString(1, prod_status);
+            ps.setInt(2, prod_id);
+            ps.setInt(3, user_id);
+            status = ps.executeUpdate();
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeConnection(con);
+        }
+
         return status;
     }
 
@@ -519,8 +618,113 @@ public class ProductDAO {
     }
 
 
-}
 
+    //---------------------------------product filter--------------------------------------------------
+    public static List<Product> filterProducts(String category, String keyword, String state, String city, String rating, int minPrice, int maxPrice, String sortBy)  {
+        List<Product> productList = new ArrayList<Product>();
+
+        try {
+            con = DBUtil.getConnection();
+            String selectQuery = "select * from product where prod_status = 'Available'";
+
+
+            if (!category.equals("allProducts") && !category.equals("")){
+                selectQuery += " and prod_category = ?";
+            } else if (!keyword.equals("")){
+                selectQuery += " and prod_category like ? or prod_title like ? or prod_description like ?";
+            }
+
+            if (!state.equals("")){
+                selectQuery += " and prod_state = ?";
+            }
+
+            if (!city.equals("")){
+                selectQuery += " and prod_city = ?";
+            }
+
+
+            selectQuery += " and prod_price between ? and ?";
+
+
+            if (rating != null){
+                selectQuery += " and prod_id in (select prod_id from review where review_rating >= ?)";
+            }
+
+            if (sortBy.equals("lowToHigh")){
+                selectQuery += " order by prod_price ASC";
+            } else if (sortBy.equals("highToLow")){
+                selectQuery += " order by prod_price DESC";
+            }
+
+            int count = 1;
+            ps = con.prepareStatement(selectQuery);
+
+            if (!category.equals("allProducts") && !category.equals("")){
+                ps.setString(count,category);
+                count += 1;
+            } else if (!keyword.equals("")){
+               ps.setString(count, "%"+keyword+"%");
+               count +=1 ;
+               ps.setString(count, "%"+keyword+"%");
+               count +=1 ;
+               ps.setString(count, "%"+keyword+"%");
+               count +=1 ;
+            }
+
+            if (!state.equals("")  ){
+                ps.setString(count, state);
+                count += 1;
+            }
+
+            if (!city.equals("")){
+                ps.setString(count, city);
+                count +=1 ;
+            }
+
+
+            ps.setInt(count, minPrice);
+            count += 1;
+
+            ps.setInt(count, maxPrice);
+                count += 1;
+
+
+            if (rating != null){
+                ps.setInt(count, Integer.parseInt(rating));
+
+            }
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProd_id(rs.getInt("prod_id"));
+                product.setProd_title(rs.getString("prod_title"));
+                product.setProd_description(rs.getString("prod_description"));
+                product.setProd_category(rs.getString("prod_category"));
+                product.setProd_duration(rs.getString("prod_duration"));
+                product.setProd_price(rs.getInt("prod_price"));
+                product.setProd_street_address(rs.getString("prod_street_address"));
+                product.setProd_city(rs.getString("prod_city"));
+                product.setProd_state(rs.getString("prod_state"));
+                product.setProd_pincode(rs.getInt("prod_pincode"));
+                product.setProd_status(rs.getString("prod_status"));
+                product.setUser_id(rs.getInt("user_id"));
+                product.setProd_firstImage(getFirstImage(rs.getInt("prod_id")));
+                product.setProd_rating(getAverageRating(rs.getInt("prod_id")));
+                productList.add(product);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeConnection(con);
+        }
+        return productList;
+
+
+
+    }
+
+}
 
 
 

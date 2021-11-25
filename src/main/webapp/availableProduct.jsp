@@ -28,7 +28,12 @@
     <script type="application/javascript" src="JS/rating.js"></script>
     <script type="application/javascript" src="JS/reviewRating.js"></script>
     <script type="application/javascript" src="JS/reviewValidation.js"></script>
+
+    <%--   rent validation --%>
+    <script type="application/javascript" src="JS/jquery.payform.min.js"></script>
     <script type="application/javascript" src="JS/rentValidation.js"></script>
+
+
     <script>
         $(function() {
             console.log("inside ")
@@ -269,7 +274,7 @@
 
 <%--rent modal--%>
 <div class="modal fade" id="RentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable " role="document">
         <div class="modal-content">
             <form action="${pageContext.request.contextPath}/RentProduct" method="post" onsubmit="return rentValidate()">
                 <div class="modal-header">
@@ -301,6 +306,90 @@
                         <span style="font-size: 22px" >Total Renting Price: </span><span id="total_price1" style="font-weight: bold; font-size: 22px; color: #043c88;"></span>
                         <input type="hidden" name="total_cost" id="total_price2" >
                     </div>
+
+                    <hr>
+                    <span style="font-size: 18px">Payment Details</span>
+                    <div class="row mt-2">
+                        <div class="col-7">
+                            <div class="form-group owner">
+                                <label for="owner">Owner</label>
+                                <input type="text" class="form-control" id="owner" placeholder="John Doe">
+                            </div>
+                            <small class="d-block text-danger float-start" id="ownerError"></small>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-group CVV">
+                                <label for="cvv">CVV</label>
+                                <input type="text" class="form-control" id="cvv" placeholder="123">
+                            </div>
+                            <small class="d-block text-danger float-start" id="cvvError"></small>
+                        </div>
+                    </div>
+
+                    <div class="row form-group mt-2 mb-2" id="card-number-field">
+                        <div class="col">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" class="form-control" id="cardNumber" placeholder="9999 9999 9999 9999">
+                            <small class="d-block text-danger float-start" id="cardNumberError"></small>
+                        </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <div class="row g-2">
+                            <span>Expiration Date</span>
+                            <div class="col-md-4 col-6">
+                                <div class="form-group mt-0">
+                                    <select class="form-select" aria-label="Default select example" id="exp_month" name="exp_month">
+                                        <option id="no-month" value="none" selected="selected">Month</option>
+                                        <option value="01">January</option>
+                                        <option value="02">February </option>
+                                        <option value="03">March</option>
+                                        <option value="04">April</option>
+                                        <option value="05">May</option>
+                                        <option value="06">June</option>
+                                        <option value="07">July</option>
+                                        <option value="08">August</option>
+                                        <option value="09">September</option>
+                                        <option value="10">October</option>
+                                        <option value="11">November</option>
+                                        <option value="12">December</option>
+                                    </select>
+                                    <small class="text-danger float-start" id="monthError"></small>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="form-outline">
+                                    <select class="form-select" aria-label="Default select example" id="exp_year" name="exp_year">
+                                        <option id="no-year" value="none" selected="selected">Year</option>
+                                        <option value="16"> 2021</option>
+                                        <option value="17"> 2022</option>
+                                        <option value="18"> 2023</option>
+                                        <option value="19"> 2024</option>
+                                        <option value="20"> 2025</option>
+                                        <option value="21"> 2026</option>
+                                        <option value="18"> 2027</option>
+                                        <option value="19"> 2028</option>
+                                        <option value="20"> 2029</option>
+                                        <option value="21"> 2030</option>
+                                    </select>
+                                    <small class="text-danger float-start" id="yearError"></small>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-5 col-xs-12">
+                                <div class="form-group float-end" id="credit_cards">
+                                    <img style="width: 55px" src="images/assets/visa.jpg" id="visa" alt="">
+                                    <img style="width: 55px" src="images/assets/mastercard.jpg" id="mastercard" alt="">
+                                    <img style="width: 55px" src="images/assets/amex.jpg" id="amex" alt="">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -431,6 +520,8 @@
         </div>
     </div>
 </section>
+
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script>

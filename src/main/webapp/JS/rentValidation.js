@@ -1,6 +1,11 @@
 function rentValidate(){
     var startDate = $("#from").val();
     var endDate = $("#to").val();
+    var cardNumber = $('#cardNumber').val();
+    var CVV = $("#cvv").val();
+    var owner = $('#owner').val();
+    var expMonth = $('#exp_month').val();
+    var expYear = $('#exp_year').val();
 
     errorCount = 0;
 
@@ -14,9 +19,35 @@ function rentValidate(){
         errorCount++;
     }
 
+    if(owner.length < 5){
+        document.getElementById("ownerError").innerHTML = "Please enter a valid name";
+        errorCount++;
+    }
+
+    if($.payform.validateCardNumber(cardNumber) === false){
+        document.getElementById("cardNumberError").innerHTML = "Please enter a card number";
+        errorCount++;
+    }
+
+    if($.payform.validateCardCVC(CVV) === false){
+        document.getElementById("cvvError").innerHTML = "Please enter a CVV number";
+        errorCount++;
+    }
+
+    if(expMonth === "none"){
+        document.getElementById("monthError").innerHTML = "Select a month";
+        errorCount++;
+    }
+
+    if(expYear === "none"){
+        document.getElementById("yearError").innerHTML = "Select a year";
+        errorCount++;
+    }
+
     if (errorCount > 0) {
         return false;
     }
+
 
 
 
@@ -89,6 +120,50 @@ function calTotalCost(prod_duration, prod_price){
 
 
 }
+
+$(function (){
+    var owner = $('#owner');
+    var cardNumber = $('#cardNumber');
+    var cardNumberField = $('#card-number-field');
+    var CVV = $("#cvv");
+    var mastercard = $("#mastercard");
+    var confirmButton = $('#confirm-purchase');
+    var visa = $("#visa");
+    var amex = $("#amex");
+
+
+    // Use the payform library to format and validate
+    // the payment fields.
+    cardNumber.payform('formatCardNumber');
+    CVV.payform('formatCardCVC');
+
+    cardNumber.keyup(function() {
+
+        amex.removeClass('transparent');
+        visa.removeClass('transparent');
+        mastercard.removeClass('transparent');
+
+        // if ($.payform.validateCardNumber(cardNumber.val()) === false) {
+        //     // cardNumberField.addClass('has-error');
+        // } else {
+        //     cardNumberField.removeClass('has-error');
+        //     // cardNumberField.addClass('has-success');
+        // }
+
+        if ($.payform.parseCardType(cardNumber.val()) === 'visa') {
+            mastercard.addClass('transparent');
+            amex.addClass('transparent');
+        } else if ($.payform.parseCardType(cardNumber.val()) === 'amex') {
+            mastercard.addClass('transparent');
+            visa.addClass('transparent');
+        } else if ($.payform.parseCardType(cardNumber.val()) === 'mastercard') {
+            amex.addClass('transparent');
+            visa.addClass('transparent');
+        }
+    });
+});
+
+
 
 
 

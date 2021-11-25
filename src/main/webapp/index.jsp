@@ -85,25 +85,111 @@
     </div>
 
 
+    <section id="services">
+        <div class="container">
+            <div class="row mt-4 g-0">
+                <div class="col-md-5 col-4 "><hr ></div>
+                <div class="col-md-2 col-4 text-center" style="vertical-align: center"> <h2><span>Services</span></h2></div>
+                <div class="col-md-5 col-4"><hr></div>
+            </div>
 
+            <div class="row">
+                <div class="col-md-4 col-6 mt-4 ">
+                    <div class="card h-100 service-card text-center">
+                        <div class="service-image-wrapper mb-2">
+                            <img class="service-img" src="images/assets/categories-icon.png" alt="categories">
+                        </div>
+                        <h5 class="card-title mt-3 mb-2">Choose from different categories</h5>
+                        <p class="card-text">Select products and services from variety of categories.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-6 mt-4">
+                    <div class="card h-100 service-card text-center">
+                        <div class="service-image-wrapper mb-2">
+                            <img class="service-img" src="images/assets/genuine-icon.png" alt="categories">
+                        </div>
+                        <h5 class="card-title mt-3 mb-2">Genuine products and services</h5>
+                        <p class="card-text">Browse products and services which are verified by the admin to be genuine.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-6 mt-4">
+                    <div class="card h-100 service-card text-center">
+                        <div class="service-image-wrapper mb-2">
+                            <img class="service-img" src="images/assets/buyer-seller-icon.png" alt="categories">
+                        </div>
+                        <h5 class="card-title mt-3 mb-2">Be a seller as well as a renter</h5>
+                        <p class="card-text">Users can both advertise their products and rent other products</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-6 mt-4 ">
+                    <div class="card h-100 service-card text-center">
+                        <div class="service-image-wrapper mb-2">
+                            <img class="service-img" src="images/assets/chatbot-icon.png" alt="categories">
+                        </div>
+                        <h5 class="card-title mt-3 mb-2">Integrated Chat bot Assistance</h5>
+                        <p class="card-text">Our website provides an integrated chat bot to answer the queries of the user.</p>
+                    </div>
+                </div>
 
+                <div class="col-md-4 col-6 mt-4">
+                    <div class="card h-100 service-card text-center">
+                        <div class="service-image-wrapper mb-2">
+                            <img class="service-img" src="images/assets/24-7-icon.png" alt="categories">
+                        </div>
+                        <h5 class="card-title mt-3 mb-2">24/7 Availability of services </h5>
+                        <p class="card-text">Our rental services are available 24/7 for users to consume.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-6 mt-4">
+                    <div class="card h-100 service-card text-center">
+                        <div class="service-image-wrapper mb-2">
+                            <img class="service-img" src="images/assets/responsive-icon.png" alt="categories">
+                        </div>
+                        <h5 class="card-title mt-3 mb-2">Responsive website layout</h5>
+                        <p class="card-text">Our website is 100% responsive giving you the best user-experience on any device.</p>
+                    </div>
+                </div>
 
-    <div class="input-group mb-3">
-        <div class="input-group-text p-0">
-            <select class="form-select  shadow-none bg-light border-0">
-                <option>Categories</option>
-                <option>One</option>
-                <option>Two</option>
-                <option>Three</option>
-                <option>Four</option>
-            </select>
+            </div>
         </div>
-        <input type="text" class="form-control" placeholder="Search Here">
-        <button class="input-group-text shadow-none px-4 btn-warning">
-            <i class="bi bi-search"></i>
-        </button>
-    </div>
+    </section>
 
+
+    <section id="about-us" >
+        <div class="container ">
+            <div class="row mt-5 g-1">
+                <div class="col-md-5 col-4 "><hr ></div>
+                <div class="col-md-2 col-4 text-center" style="vertical-align: center"> <h2><span>About Us</span></h2></div>
+                <div class="col-md-5 col-4"><hr></div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-lg-5 mt-3">
+                    <div class="card about-us-image-wrapper ">
+                        <img  src="images/assets/comitment.jpeg" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-7 mt-3">
+                    <div class="card about-us-info ">
+                        <div class="card-body">
+                            <p>
+                                Our project addresses different problems people face when they want something on a temporary basis or earn something from a product or a service on a continuous basis.
+                                Firstly, people may want to rent different kinds of product or services and may come across questions such as - How to rent? Whom to contact? Is the product/service legit? Can I get all this information from a single source?
+                            </p>
+                            <p>
+                                Additionally, people who want to rent something may come across questions such as How to advertise my products or services for rent? Unlike flyers or newspaper advertisements, is there a way to advertise my products 24/7? How can my advertisement reach a larger audience?
+                            </p>
+                            <p>
+                                Well, our Rental and Service Management System provides answers to all these questions. We provide a web application for users which allows them to advertise the product or services as well as explore different products and services to rent thereby addressing the problems mentioned above.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 
 
 
@@ -112,6 +198,8 @@
 
 
     <br>
+
+    <%@ include file="footer.jsp" %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 
 </body>

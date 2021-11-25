@@ -27,10 +27,10 @@
                         <a class="nav-link " href="${pageContext.request.contextPath}/ProductListing?action=allProducts" >Products</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link " href="#">Services</a>
+                        <a class="nav-link " href="index.jsp#services">Services</a>
                     </li>
                     <li class="nav-item ">
-                        <a class="nav-link " href="#">About Us</a>
+                        <a class="nav-link " href="index.jsp#about-us">About Us</a>
                     </li>
                     <c:choose>
                         <c:when test="${ (not empty sessionScope.user_id) and (sessionScope.type == 'DBLogin')}">
@@ -95,8 +95,8 @@
             <div class="sidebar">
                 <a class = "nav-link" href="index.jsp">Home</a>
                 <a class="nav-link " href="${pageContext.request.contextPath}/ProductListing?action=allProducts" >Products</a>
-                <a class="nav-link " href="#">Services</a>
-                <a class="nav-link " href="#">About Us</a>
+                <a class="nav-link " href="index.jsp#services">Services</a>
+                <a class="nav-link " href="index.jsp#about-us">About Us</a>
                 <c:choose>
                     <c:when test="${ (not empty sessionScope.user_id) and (sessionScope.type == 'DBLogin')}">
                         <a class="nav-link " href="${pageContext.request.contextPath}/MyAccount">Account</a>

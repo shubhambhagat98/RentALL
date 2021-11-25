@@ -109,7 +109,7 @@
                     <c:when test="${not empty requestScope.rentedProductList}">
                         <c:forEach var="product" items="${requestScope.rentedProductList}">
                             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-6 item mb-3">
-                                <a class="product-card" href="">
+                                <a class="product-card" href="${pageContext.request.contextPath}/ProductDetails?action=rentedProductsByYou&product_id=${product.prod_id}">
                                     <div class="card h-100">
                                         <div class="card-body">
                                             <div class="card-image-wrapper">

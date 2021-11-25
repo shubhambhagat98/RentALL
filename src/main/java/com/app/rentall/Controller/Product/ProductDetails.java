@@ -77,6 +77,7 @@ public class ProductDetails extends HttpServlet {
             request.getRequestDispatcher("YourProduct.jsp").forward(request, response);
 
         }else  if (request.getParameter("action").equals("rentedProductsByYou")){
+            System.out.println("inside rented product by you condition");
             RentedProduct rentedProduct = ProductDAO.getRentedProductDetails(product_id);
             assert rentedProduct != null;
             User renter = DBLoginDAO.getUserById(rentedProduct.getUser_id());
