@@ -217,7 +217,7 @@
                                 <div class="form-outline">
                                     <div class="input-group " id="search-input-group">
                                         <span  class="input-group-text" id="microphone-button" onclick="micBtnClick()" ><i  style="cursor:pointer; background: none" class="fa fa-microphone-slash" id="microphone-icon"></i></span>
-                                        <input class="form-control" id="search-text-box" name="keyword" type="text" placeholder="Search Google..." autocomplete="off" style="border-left: none "  value="${requestScope.keyword}"   >
+                                        <input class="form-control" id="search-text-box" name="keyword" type="text" placeholder="Search Product..." autocomplete="off" style="border-left: none "  value="${requestScope.keyword}"   >
                                         <button type="submit" class="input-group-text shadow-none px-3 btn-warning"><i class="bi bi-search"></i></button>
 
                                     </div>

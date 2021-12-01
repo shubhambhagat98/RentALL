@@ -116,6 +116,7 @@
                         <span class="info"><b>Contact:</b> ${requestScope.seller.email_id}</span>
                     </div>
                     <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#FinishRentingModal">Finish Renting</button>
+                    <button type="button" class="btn btn-primary mt-2" onclick="window.location.href = '${pageContext.request.contextPath}/ViewMessage?action=getMessageById&to_user_id=${requestScope.seller.user_id}'">Chat</button>
 
                 </div>
             </div>

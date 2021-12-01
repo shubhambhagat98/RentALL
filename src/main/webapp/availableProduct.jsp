@@ -183,6 +183,7 @@
                         </c:when>
                         <c:when test="${( not empty sessionScope.user_id) and (sessionScope.type != 'admin') and (sessionScope.user_id != requestScope.product.user_id)}">
                             <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#RentModal">Rent Product</button>
+                            <button type="button" class="btn btn-primary mt-2" onclick="window.location.href = '${pageContext.request.contextPath}/ViewMessage?action=getMessageById&to_user_id=${requestScope.seller.user_id}'">Chat</button>
                         </c:when>
                         <c:when test="${empty sessionScope.user_id}">
                             <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#LoginAlertModal">Rent Product</button>

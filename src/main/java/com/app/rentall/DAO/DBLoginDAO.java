@@ -109,23 +109,27 @@ public class DBLoginDAO {
     // get user by id
     public static User getUserById(int user_id){
         Connection conn = null;
-        PreparedStatement ps;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        User user = null;
         try{
             conn = DBUtil.getConnection();
             String selectQuery = "select * from user where user_id = ?";
             ps = conn.prepareStatement(selectQuery);
             ps.setInt(1, user_id);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             if (rs.next()) {
-                return new User(rs.getInt("user_id"),rs.getString("first_name"),rs.getString("last_name"),rs.getString("email_id"),rs.getLong("contact"), rs.getString("type"));
+                user =  new User(rs.getInt("user_id"),rs.getString("first_name"),rs.getString("last_name"),rs.getString("email_id"),rs.getLong("contact"), rs.getString("type"));
             }
         }catch (Exception e){
             e.printStackTrace();
         }finally {
+            try { if (rs != null) rs.close(); } catch (Exception e) {};
+            try { if (ps != null) ps.close(); } catch (Exception e) {};
             DBUtil.closeConnection(conn);
         }
 
-        return  null;
+        return  user;
     }
 
 

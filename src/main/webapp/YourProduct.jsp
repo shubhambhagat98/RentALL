@@ -43,7 +43,7 @@
             <div class="container">
                 <h2>Product Details</h2>
                 <ul>
-                    <li><a class="nav-link" href="viewProfile.jsp">View Profile</a></li>
+                    <li><a class="nav-link" href="${pageContext.request.contextPath}/Messages">Messages</a></li>
                     <li><a class="nav-link" href="addProduct.jsp">Add Product</a></li>
                 </ul>
             </div>

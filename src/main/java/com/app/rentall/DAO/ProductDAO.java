@@ -656,6 +656,8 @@ public class ProductDAO {
                 selectQuery += " order by prod_price DESC";
             }
 
+            System.out.println(selectQuery);
+
             int count = 1;
             ps = con.prepareStatement(selectQuery);
 
@@ -693,6 +695,8 @@ public class ProductDAO {
                 ps.setInt(count, Integer.parseInt(rating));
 
             }
+
+            System.out.println(ps);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
