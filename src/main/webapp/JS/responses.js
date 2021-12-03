@@ -59,6 +59,9 @@ function getBotResponse(input) {
     else if (input.includes("about the company") || input.includes("tell me about you") || input.includes("about")) {
         return "Our team at RentALL is committed towards giving a convenient and hassle free renting service to the user." +
             "Please check our About Us section on the homepage to know more about our vision and mission.";
+    }else if (input.includes("chat") || input.includes("message") || (input.includes("contact") && input.includes("seller")) ) {
+        return "1. To start chatting with a seller, go to the product details page and click on 'chat' button. it will redirect you to a chat window where te seller will be the receiver." +
+            "2. You can also view your recent chat history by clicking on 'Message' button on your Account page.";
     }
     else if (input.includes("bye")) {
         return "Hope to see you again!";
