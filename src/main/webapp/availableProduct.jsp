@@ -289,7 +289,7 @@
                         <div class="col-6 d-block">
                             <span  style="display:inline-block; vertical-align:middle;">Select start date:</span>
                             <div class="input-group input-append date"  >
-                                <input type="text"  name="startDate" class="form-control float-start" style="border-right: none " id="from" placeholder="click here">
+                                <input type="text"  name="startDate" class="form-control float-start" style="border-right: none " id="from" placeholder="click here" autocomplete="off" >
                                 <span class="input-group-text" style="background: none; border-left: none" ><i class="fa fa-calendar" style="cursor:pointer; background: none" ></i></span>
                                 <small class="text-danger float-start" id="startDateError"></small>
                             </div>
@@ -297,7 +297,7 @@
                         <div class="col-6 d-block">
                             <span  style="display:inline-block; vertical-align:middle;">Select end date:</span>
                             <div class="input-group input-append date"  >
-                                <input type="text" name="endDate" class="form-control float-start" style="border-right: none " id="to" placeholder="click here">
+                                <input type="text" name="endDate" class="form-control float-start" style="border-right: none " id="to" placeholder="click here" autocomplete="off">
                                 <span class="input-group-text" style="background: none; border-left: none" ><i class="fa fa-calendar" style="cursor:pointer; background: none" ></i></span>
                             </div>
                             <small class="d-block text-danger float-start" id="endDateError"></small>
@@ -511,7 +511,7 @@
     </section>
 </div>
 
-<section class="product-location mt-4 mb-2">
+<section class="product-location mt-4 mb-4">
     <div class="container">
         <h6>Product Location</h6>
         <div class="address d-block">
@@ -523,6 +523,38 @@
 </section>
 
 
+<section class="product-review  mb-4">
+    <div class="container">
+        <h6>Product Reviews</h6>
+        <div class="review row mt-3">
+            <c:choose>
+                <c:when test="${not empty requestScope.reviewList}">
+                    <c:forEach var="review" items="${requestScope.reviewList}">
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <h5 class="card-title">${review.reviewer_name}</h5>
+                                <span class="stars" data-rating="${review.review_rating}" data-num-stars="5" ></span>
+                                <span class="card-title"> | ${review.review_title}</span>
+                                <p class="card-text">
+                                    ${review.review_description}
+                                </p>
+                                <span class="card-subtitle text-muted"> Date: ${review.review_date}</span>
+                            </div>
+                        </div>
+                    </c:forEach>
+                </c:when>
+                <c:otherwise>
+                    <div>
+                        <p>Product does not have any reviews</p>
+                    </div>
+                </c:otherwise>
+            </c:choose>
+        </div>
+
+    </div>
+</section>
+
+<%@ include file="chatbot.jsp" %>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script>

@@ -122,6 +122,9 @@
                             <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#ShowModal" >Make Available</button>
                             <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#DeleteModal">Delete Product</button>
                         </c:when>
+                        <c:when test="${requestScope.product.prod_status == 'Rented' and requestScope.rentFlag == true}">
+                            <button type="button" class="btn btn-primary mt-2" onclick="window.location.href = '${pageContext.request.contextPath}/ViewMessage?action=getMessageById&to_user_id=${requestScope.renter.user_id}'">Chat with renter</button>
+                        </c:when>
                     </c:choose>
                 </div>
             </div>
@@ -247,7 +250,7 @@
 
 
 
-
+<%@ include file="chatbot.jsp" %>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>

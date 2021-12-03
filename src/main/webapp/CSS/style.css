@@ -858,6 +858,12 @@ span.banner-subtitle{
     /*text-shadow: 2px 2px 2px rgba(0,2,0,0.6);*/
 }
 
+.product-review .container h6{
+    color: #043c88;
+    font-weight: bold;
+}
+
+
 
 
 
@@ -958,4 +964,22 @@ span.banner-subtitle{
     text-align: center;
     font-size: 50px;
     color: white;
+}
+
+
+/*complaint*/
+.complaint-image{
+    width: 100%;
+    height: 350px;
+    min-height: 300px;
+}
+
+.complaint-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.complaint-info{
+    font-size: 20px;
 }

@@ -1,6 +1,7 @@
 package com.app.rentall.Controller.UserAccount;
 
 import com.app.rentall.DAO.ProductDAO;
+import com.app.rentall.Model.Complaint;
 import com.app.rentall.Model.Product;
 
 import javax.servlet.*;
@@ -37,7 +38,9 @@ public class Admin extends HttpServlet {
             request.getRequestDispatcher("admin.jsp").forward(request, response);
         } else if (query.equals("complaints")){
             request.setAttribute("adminQuery","complaints");
-            request.setAttribute("complaints", "complaint board to be shown here");
+            List<Complaint> complaintList = ProductDAO.getAllComplaints();
+            request.setAttribute("complaintList", complaintList);
+            System.out.println("complaint list size"+complaintList.size());
             request.getRequestDispatcher("admin.jsp").forward(request, response);
         }
 

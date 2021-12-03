@@ -1,10 +1,7 @@
 package com.app.rentall.DAO;
 
 import com.app.rentall.DBUtil.DBUtil;
-import com.app.rentall.Model.Complaint;
-import com.app.rentall.Model.Product;
-import com.app.rentall.Model.RentedProduct;
-import com.app.rentall.Model.Review;
+import com.app.rentall.Model.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -619,6 +616,37 @@ public class ProductDAO {
 
 
 
+
+    // Get all complaints
+    public static List<Complaint> getAllComplaints(){
+        List<Complaint> complaints = new ArrayList<>();
+
+        try{
+            con = DBUtil.getConnection();
+            String selectQuery = "select * from complaints";
+            ps = con.prepareStatement(selectQuery);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                User renter = DBLoginDAO.getUserById(rs.getInt("renter_id"));
+                User seller = DBLoginDAO.getUserById(rs.getInt("seller_id"));
+                Product product = ProductDAO.getProductById(rs.getInt("product_id"));
+                String description = rs.getString("description");
+                String date = rs.getString("date");
+                Complaint complaint = new Complaint(renter, seller,description,  date, product);
+                complaints.add(complaint);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeConnection(con);
+        }
+
+        return complaints;
+    }
+
+
+
+
     //---------------------------------product filter--------------------------------------------------
     public static List<Product> filterProducts(String category, String keyword, String state, String city, String rating, int minPrice, int maxPrice, String sortBy)  {
         List<Product> productList = new ArrayList<Product>();
@@ -638,7 +666,7 @@ public class ProductDAO {
                 selectQuery += " and prod_state = ?";
             }
 
-            if (!city.equals("")){
+            if (city != null && !city.equals("") ){
                 selectQuery += " and prod_city = ?";
             }
 
@@ -678,7 +706,7 @@ public class ProductDAO {
                 count += 1;
             }
 
-            if (!city.equals("")){
+            if (city != null && !city.equals("")){
                 ps.setString(count, city);
                 count +=1 ;
             }

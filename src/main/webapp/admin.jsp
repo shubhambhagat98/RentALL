@@ -107,13 +107,43 @@
             </section>
         </c:when>
         <c:when test="${requestScope.adminQuery == 'complaints'}">
-            <section class="your-listings mt-3">
+            <section class="complaint-list mt-3">
                 <div class="container">
                     <div class="title-box">
                         <h2>Complaints</h2>
                     </div>
-                    <div class="mt-2">
-                        <h2>${requestScope.complaints}</h2>
+                    <div class="complaint mt-2">
+                        <c:choose>
+                            <c:when test="${not empty requestScope.complaintList}">
+                                <c:forEach var = "complaint" items="${requestScope.complaintList}">
+                                    <div class = "card mb-3">
+                                        <div class = "row no-gutters">
+                                            <div class = "col-md-6">
+                                                <div class = "complaint-image p-3">
+                                                    <img src= "images/products/${complaint.product.prod_firstImage}" class="complaint-card-img" alt=""/>
+                                                </div>
+                                            </div>
+                                            <div class = "col-md-6">
+                                                <div class = "card-body">
+                                                    <h3 class = "card-title">${complaint.product.prod_title}</h3>
+                                                    <hr>
+                                                    <span class = "card-title d-block complaint-info"><b>Seller name:</b> ${complaint.seller.first_name} ${complaint.seller.last_name}</span>
+                                                    <span class = "card-title d-block complaint-info"><b>Seller contact:</b>${complaint.seller.email_id}</span>
+                                                    <p class = "card-text complaint-info"><b>Description:</b> ${complaint.description}</p>
+                                                    <span class = "card-title complaint-info"><b>Submitted By: </b>${complaint.renter.first_name} ${complaint.renter.last_name}</span>
+                                                    <span class="card-title d-block complaint-info "> <b>Date:</b> ${complaint.date} </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <div>
+                                    <h4>No complaint record found.</h4>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </section>
@@ -121,10 +151,6 @@
     </c:choose>
 </div>
 
-
-<h3>Welcome  ${sessionScope.email_id}</h3>
-<h3>First name  ${sessionScope.first_name}</h3>
-<h3>last name  ${sessionScope.last_name}</h3>
 
 
 

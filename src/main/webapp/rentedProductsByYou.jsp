@@ -272,7 +272,7 @@
 </div>
 
 
-
+<%@ include file="chatbot.jsp" %>
 
 
 

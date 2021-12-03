@@ -100,7 +100,7 @@
 </section>
 
 
-
+<%@ include file="chatbot.jsp" %>
 
 
 

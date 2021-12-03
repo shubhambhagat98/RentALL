@@ -1,3 +1,4 @@
+<%--suppress XmlDuplicatedId --%>
 <%--
   Created by IntelliJ IDEA.
   User: shubham
@@ -65,6 +66,34 @@
             $('.slider-input').change(function(e) {
                 var setIndex = (this.id == "upperlimit") ? 1 : 0;
                 $('#mySlider').slider("values", setIndex, $(this).val())
+            })
+
+
+
+
+
+        //    modal filter slider
+            $('#mySlider1').slider({
+
+                range: true,
+                min: 0,
+                max: 1000,
+                step: 50,
+                values: [ minPrice, maxPrice],
+                create: attachSlider1,
+                slide: attachSlider1,
+                stop: attachSlider1
+            })
+
+            function attachSlider1() {
+                console.log(minPrice+" "+maxPrice)
+                $('#lowerlimit1').val($('#mySlider1').slider("values", 0));
+                $('#upperlimit1').val($('#mySlider1').slider("values", 1));
+            }
+
+            $('.slider-input1').change(function(e) {
+                var setIndex = (this.id == "upperlimit1") ? 1 : 0;
+                $('#mySlider1').slider("values", setIndex, $(this).val())
             })
 
 
@@ -284,8 +313,108 @@
 </div>
 
 
+<%--Filter modal--%>
+<div class="modal fade" id="FilterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <form action="${pageContext.request.contextPath}/SearchProduct" method="get">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="AddComplaintTitle">Filter</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="category" value="${requestScope.category}">
+                    <input type="hidden" name="keyword" value="${requestScope.keyword}">
+                    <input type="hidden" name="action" value="filter">
+
+                    <div class="form-outline mb-4 row g-2">
+                        <label  class="form-label mb-0" >Product Location</label>
+                        <input type="hidden" name="country" id="countryId1" value="US"/>
+                        <div class="col-md-6">
+                            <select class="form-select states1 order-alpha" name="state" id="stateId1" >
+                                <option value="${requestScope.state}">State</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <select name="city" class="form-select cities1 order-alpha" id="cityId1">
+                                <option value="${requestScope.city}">City</option>
+                            </select>
+                        </div>
+                    </div>
 
 
+
+                    <div class="form-outline mt-3 mb-4">
+                        <label  class="form-label mb-1" >Rating</label>
+                        <span class="d-block rating-filter">
+                                            <input type="radio" name="rating_button" value="4" <c:if test="${requestScope.rating == 4}"> checked </c:if>/>
+                                            <i class="fa fa-star "></i><i class="fa fa-star "></i><i class="fa fa-star "></i><i class="fa fa-star "></i> & up
+                                        </span>
+                        <span class="d-block rating-filter">
+                                            <input type="radio" name="rating_button" value="3" <c:if test="${requestScope.rating == 3}"> checked </c:if>/>
+                                            <i class="fa fa-star "></i><i class="fa fa-star "></i><i class="fa fa-star "></i> & up
+                                        </span>
+                        <span class="d-block rating-filter">
+                                            <input type="radio" name="rating_button" value="2" <c:if test="${requestScope.rating == 2}"> checked </c:if>/>
+                                            <i class="fa fa-star "></i><i class="fa fa-star "></i> & up
+                                        </span>
+                        <span class="d-block rating-filter">
+                                            <input type="radio" name="rating_button" value="1" <c:if test="${requestScope.rating == 1}"> checked </c:if>/>
+                                            <i class="fa fa-star "></i>& up
+                                        </span>
+                    </div>
+
+
+
+                    <div class="form-outline mt-3 mb-4">
+                        <label  class="form-label mb-1" >Price</label>
+                        <div class="row mt-2 mb-2">
+                            <div class="col">
+                                <div id="mySlider1"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="inputs row g-2">
+                            <div class="col-md-6">
+                                <label for="lowerlimit1">Min</label>
+                                <input id="lowerlimit1" type="text" class="form-control slider-input1" name="minPrice"/>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="upperlimit1">Max</label>
+                                <input type="text" class="form-control slider-input1" id="upperlimit1" name="maxPrice"/>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-outline mt-3 mb-4">
+                        <label  class="form-label mb-1" >Sort by</label>
+                        <select class="form-select" aria-label="Default select example" id="sortBy1" name="sortBy">
+                            <option id="default" value="default" <c:if test="${requestScope.sortBy == 'default'}"> selected="selected" </c:if> >Default</option>
+                            <option value="lowToHigh" <c:if test="${requestScope.sortBy == 'lowToHigh'}"> selected="selected" </c:if>>Price: low to high </option>
+                            <option value="highToLow" <c:if test="${requestScope.sortBy == 'highToLow'}"> selected="selected" </c:if>>Price: high to low</option>
+                        </select>
+
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <span  class="btn btn-secondary filter-button-cancel" onclick="resetFilter1()">Reset</span>
+
+                    <button type="submit" class="btn btn-primary" >Apply</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<%@ include file="chatbot.jsp" %>
 
 
 
@@ -293,6 +422,7 @@
 <script type="application/javascript" src="JS/voiceRecognition.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script src="//geodata.solutions/includes/statecity.js"></script>
+<script src="JS/stateCity.js"></script>
 <script type="application/javascript">
     jQuery(".states").change(function () {
         console.log($(this).val())
