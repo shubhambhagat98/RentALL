@@ -75,9 +75,9 @@ public class ChatDAO {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-//            try { if (rs1 != null) rs1.close(); } catch (Exception e) {};
-//            try { if (ps != null) ps.close(); } catch (Exception e) {};
-//            DBUtil.closeConnection(con);
+            try { if (rs1 != null) rs1.close(); } catch (Exception e) {};
+            try { if (ps != null) ps.close(); } catch (Exception e) {};
+            DBUtil.closeConnection(con);
         }
         return messageList;
     }
