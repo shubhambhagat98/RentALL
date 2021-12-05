@@ -63,7 +63,7 @@
                                     <div class="card h-100">
                                         <div class="card-body">
                                             <div class="card-image-wrapper">
-                                                <img class="card-img-top " src="images/products/${product.prod_firstImage}"
+                                                <img class="card-img-top " src="https://rentallproductimage.s3.amazonaws.com/${product.prod_firstImage}"
                                                      alt="product image"/>
                                             </div>
                                             <h5 class="card-title mt-3 mb-2">${product.prod_title}</h5>
@@ -113,7 +113,7 @@
                                     <div class="card h-100">
                                         <div class="card-body">
                                             <div class="card-image-wrapper">
-                                                <img class="card-img-top " src="images/products/${product.prod_firstImage}"
+                                                <img class="card-img-top " src="https://rentallproductimage.s3.amazonaws.com/${product.prod_firstImage}"
                                                      alt="product image"/>
                                             </div>
                                             <h5 class="card-title mt-3 mb-2">${product.prod_title}</h5>

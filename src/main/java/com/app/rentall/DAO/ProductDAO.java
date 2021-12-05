@@ -593,6 +593,25 @@ public class ProductDAO {
         return status;
     }
 
+
+//    delete review
+    public static int deleteReview(int productId){
+        int status = 0;
+        try {
+            con = DBUtil.getConnection();
+            String deleteQuery = "DELETE FROM review where prod_id = ?";
+            ps = con.prepareStatement(deleteQuery);
+            ps.setInt(1, productId);
+            status = ps.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeConnection(con);
+        }
+        return status;
+    }
+
+
     // add complaint
     public static int addComplaint(Complaint complaint){
         int status = 0;
@@ -642,6 +661,24 @@ public class ProductDAO {
         }
 
         return complaints;
+    }
+
+
+    //    delete complaint
+    public static int deleteComplaint(int productId){
+        int status = 0;
+        try {
+            con = DBUtil.getConnection();
+            String deleteQuery = "DELETE FROM complaints where product_id = ?";
+            ps = con.prepareStatement(deleteQuery);
+            ps.setInt(1, productId);
+            status = ps.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeConnection(con);
+        }
+        return status;
     }
 
 

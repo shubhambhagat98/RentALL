@@ -36,7 +36,7 @@
 
 <div class="signup-body-background ">
     <div class="container signup-form-div mt-5 mb-5" >
-        <form name="addProduct" action="${pageContext.request.contextPath}/AddProduct" method="post" onsubmit="return addProductValidate()" enctype="multipart/form-data">
+        <form name="addProduct" action="${pageContext.request.contextPath}/AddProduct1" method="post" onsubmit="return addProductValidate()" enctype="multipart/form-data">
             <div class="card p-3 text-center py-4"  ><!-- style="width: 35rem;" -->
                 <div class="mb-2">
                     <h4>Add Product</h4>

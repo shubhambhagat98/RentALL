@@ -72,12 +72,12 @@
                             <c:choose>
                                 <c:when test="${count == 0}">
                                     <div class="carousel-item single-product-image active">
-                                        <img class="img-fluid" src="images/products/${image}" alt="">
+                                        <img class="img-fluid" src="https://rentallproductimage.s3.amazonaws.com/${image}" alt="">
                                     </div>
                                 </c:when>
                                 <c:otherwise>
                                     <div class="carousel-item single-product-image">
-                                        <img class="img-fluid" src="images/products/${image}" alt="">
+                                        <img class="img-fluid" src="https://rentallproductimage.s3.amazonaws.com/${image}" alt="">
                                     </div>
                                 </c:otherwise>
                             </c:choose>

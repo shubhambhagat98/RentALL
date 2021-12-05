@@ -61,7 +61,7 @@
                                             <div class="card h-100">
                                                 <div class="card-body">
                                                     <div class="card-image-wrapper">
-                                                        <img class="card-img-top " src="images/products/${product.prod_firstImage}"
+                                                        <img class="card-img-top " src="https://rentallproductimage.s3.amazonaws.com/${product.prod_firstImage}"
                                                              alt="product image"/>
                                                     </div>
                                                     <h5 class="card-title mt-3 mb-2">${product.prod_title}</h5>
@@ -120,7 +120,7 @@
                                         <div class = "row no-gutters">
                                             <div class = "col-md-6">
                                                 <div class = "complaint-image p-3">
-                                                    <img src= "images/products/${complaint.product.prod_firstImage}" class="complaint-card-img" alt=""/>
+                                                    <img src= "https://rentallproductimage.s3.amazonaws.com/${complaint.product.prod_firstImage}" class="complaint-card-img" alt=""/>
                                                 </div>
                                             </div>
                                             <div class = "col-md-6">
