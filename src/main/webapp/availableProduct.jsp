@@ -554,6 +554,70 @@
     </div>
 </section>
 
+<c:choose>
+    <c:when test="${not empty requestScope.recommendedProducts}">
+        <div class="mt-3">
+            <section class="product-recommendations mt-2">
+                <div class="container">
+                    <h6>Product Recommendations</h6>
+                </div>
+            </section>
+        </div>
+        <div class="display-section ">
+            <section class="your-listings mt-3" >
+                <div class="container">
+                    <div class="row mt-3">
+                        <c:choose>
+                            <c:when test="${not empty requestScope.recommendedProducts}">
+                                <c:forEach var="product" items="${requestScope.recommendedProducts}">
+                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-6 item mb-3">
+                                        <a class="product-card" href="${pageContext.request.contextPath}/ProductDetails?action=availableProduct&product_id=${product.prod_id}">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <div class="card-image-wrapper">
+                                                        <img class="card-img-top " src="https://rentallproductimage.s3.amazonaws.com/${product.prod_firstImage}"
+                                                             alt="product image"/>
+                                                    </div>
+                                                    <h5 class="card-title mt-3 mb-2">${product.prod_title}</h5>
+                                                        <%--                                            <h6 class="card-subtitle text-muted">Category: ${product.prod_category}</h6>--%>
+                                                    <h6 class="card-subtitle text-muted">Category: ${product.prod_category}</h6>
+                                                    <c:if test="${product.prod_rating > 0.0}">
+                                                        <div class="mt-2"><span class="stars" data-rating="${product.prod_rating}" data-num-stars="5" ></span></div>
+                                                    </c:if>
+
+                                                    <div class = "mt-2">
+                                                        <div  style="display:inline-block; vertical-align:middle;">
+                                                    <span class = "float-start product-price" >
+                                                         $${product.prod_price}.00
+                                                    </span>
+                                                        </div>
+                                                        <div style="display:inline-block; vertical-align:middle; float: right">
+                                                            <button class="btn btn-primary float-end" onclick="location.href = '${pageContext.request.contextPath}/ProductDetails?action=availableProduct&product_id=${product.prod_id}'">View</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <div>
+                                    <h2>No Records to show.</h2>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </c:when>
+</c:choose>
+
+
+
+
+
 <%@ include file="chatbot.jsp" %>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>

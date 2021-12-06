@@ -2,6 +2,7 @@ package com.app.rentall.DAO;
 
 import com.app.rentall.DBUtil.DBUtil;
 import com.app.rentall.Model.*;
+import com.google.gson.Gson;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -792,6 +793,135 @@ public class ProductDAO {
 
 
     }
+
+
+
+
+
+
+
+
+
+//    admin analytics and recommendation
+    public static String getProductCategoryCount() {
+        Gson gsonObj = new Gson();
+        Map<Object,Object> map = null;
+        List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
+        String dataPoints = null;
+
+        try {
+            con = DBUtil.getConnection();
+            String selectQuery = "select distinct p1.prod_category as prod_category,IFNULL(count, 0) as prod_count from product_category p1 left join (select prod_category,count(1) as count from product where prod_status='Rented' group by prod_category) p2 on p2.prod_category=p1.prod_category ";
+            ps = con.prepareStatement(selectQuery);
+            ResultSet rs = ps.executeQuery();
+            String xVal, yVal;
+            while (rs.next()) {
+                xVal = rs.getString("prod_category");
+                yVal = rs.getString("prod_count");
+                map = new HashMap<Object,Object>(); map.put("x", xVal); map.put("y", yVal); list.add(map);
+                dataPoints = gsonObj.toJson(list);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeConnection(con);
+        }
+        return dataPoints;
+    }
+
+    public static String getProductLocationCount() {
+        Gson gsonObj = new Gson();
+        Map<Object,Object> map = null;
+        List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
+        String dataPoints = null;
+
+        try {
+            con = DBUtil.getConnection();
+            String selectQuery = "select distinct p1.prod_city as prod_location,IFNULL(count, 0) as prod_count from product p1 left join (select prod_city,count(1) as count from product where prod_status='Rented' group by prod_city) p2 on p2.prod_city=p1.prod_city\n";
+            ps = con.prepareStatement(selectQuery);
+            ResultSet rs = ps.executeQuery();
+            String xVal, yVal;
+            while (rs.next()) {
+                xVal = rs.getString("prod_location");
+                yVal = rs.getString("prod_count");
+                map = new HashMap<Object,Object>(); map.put("x", xVal); map.put("y", yVal); list.add(map);
+                dataPoints = gsonObj.toJson(list);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeConnection(con);
+        }
+        return dataPoints;
+    }
+
+    public static List<Product> getRecommendedProductsByUserId(int user_id) {
+        List<Product> productList = new ArrayList<Product>();
+        try {
+            con = DBUtil.getConnection();
+            String selectQuery = "select * from product p2 where p2.prod_category in " +
+                    "(select DISTINCT p1.prod_category from rented_products rp join product p1 on p1.prod_id=rp.prod_id where rp.user_id='"+user_id+"') p2.prod_status = 'Available' LIMIT 4";
+            ps = con.prepareStatement(selectQuery);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProd_id(rs.getInt("prod_id"));
+                product.setProd_title(rs.getString("prod_title"));
+                product.setProd_description(rs.getString("prod_description"));
+                product.setProd_category(rs.getString("prod_category"));
+                product.setProd_price(rs.getInt("prod_price"));
+                product.setProd_street_address(rs.getString("prod_street_address"));
+                product.setProd_city(rs.getString("prod_city"));
+                product.setProd_state(rs.getString("prod_state"));
+                product.setProd_pincode(rs.getInt("prod_pincode"));
+                product.setProd_status(rs.getString("prod_status"));
+                product.setUser_id(rs.getInt("user_id"));
+                product.setProd_firstImage(getFirstImage(rs.getInt("prod_id")));
+                product.setProd_rating(getAverageRating(rs.getInt("prod_id")));
+                productList.add(product);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeConnection(con);
+        }
+        return productList;
+    }
+
+
+    public static List<Product> getSimilarProducts( int prod_id) {
+        List<Product> productList = new ArrayList<Product>();
+        try {
+            con = DBUtil.getConnection();
+            String selectQuery = "select * from product where prod_id<>"+prod_id+" and  prod_category in (select DISTINCT prod_category from product where prod_id="+prod_id+") and prod_status = 'Available' LIMIT 4;";
+            ps = con.prepareStatement(selectQuery);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setProd_id(rs.getInt("prod_id"));
+                product.setProd_title(rs.getString("prod_title"));
+                product.setProd_description(rs.getString("prod_description"));
+                product.setProd_category(rs.getString("prod_category"));
+                product.setProd_price(rs.getInt("prod_price"));
+                product.setProd_street_address(rs.getString("prod_street_address"));
+                product.setProd_city(rs.getString("prod_city"));
+                product.setProd_state(rs.getString("prod_state"));
+                product.setProd_pincode(rs.getInt("prod_pincode"));
+                product.setProd_status(rs.getString("prod_status"));
+                product.setUser_id(rs.getInt("user_id"));
+                product.setProd_firstImage(getFirstImage(rs.getInt("prod_id")));
+                product.setProd_rating(getAverageRating(rs.getInt("prod_id")));
+                productList.add(product);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            DBUtil.closeConnection(con);
+        }
+        return productList;
+    }
+
 
 }
 

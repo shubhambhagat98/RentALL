@@ -23,6 +23,7 @@
     <meta name="google-signin-client_id" content="359199286110-ji2g5fkkf1ktpjhoadqejfprcks90vlr.apps.googleusercontent.com"/>
     <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
     <script type="application/javascript" src="JS/signout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>rentall</title>
 
 </head>
@@ -101,7 +102,14 @@
                         <h2>Analytics</h2>
                     </div>
                     <div class="mt-2">
-                        <h2>${requestScope.analytics}</h2>
+                        <div class ="chartBox">
+                            <canvas id="myChart" ></canvas>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class ="chartBox">
+                            <canvas id="myChart2" ></canvas>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -156,5 +164,133 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var prodCategoryCount =${requestScope.prodCategoryCount.toString()};
+    var labels = prodCategoryCount.map(function(categoryMap) {
+        return categoryMap.x;
+    });
+    var data = prodCategoryCount.map(function(categoryMap) {
+        return categoryMap.y;
+    });
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '# of something',
+                data: data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false,
+                },
+                title: {
+                    display: true,
+                    text: 'product category analytics',
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    }
+                },
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks:{
+                        stepSize:1
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
+
+
+<script>
+    var ctx = document.getElementById('myChart2').getContext('2d');
+    var prodLocationCount =${requestScope.prodLocationCount.toString()};
+    var labels = prodLocationCount.map(function(categoryMap) {
+        return categoryMap.x;
+    });
+    var data = prodLocationCount.map(function(categoryMap) {
+        return categoryMap.y;
+    });
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: '# of something',
+                data: data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false,
+                },
+                title: {
+                    display: true,
+                    text: 'product location analytics',
+                    padding: {
+                        top: 10,
+                        bottom: 30
+                    }
+                },
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks:{
+                        stepSize:1
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
 </body>
 </html>

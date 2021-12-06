@@ -15,6 +15,8 @@ import java.util.List;
 public class Admin extends HttpServlet {
 
     static List<Product> pendingProductList;
+    static String prodCategoryCount;
+    static String prodLocationCount;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,8 +35,11 @@ public class Admin extends HttpServlet {
             request.setAttribute("pendingProductList", pendingProductList);
             request.getRequestDispatcher("admin.jsp").forward(request, response);
         } else if (query.equals("analytics")){
+            prodCategoryCount = ProductDAO.getProductCategoryCount();
+            prodLocationCount = ProductDAO.getProductLocationCount();
             request.setAttribute("adminQuery","analytics");
-            request.setAttribute("analytics", "analytics board to be shown here");
+            request.setAttribute("prodCategoryCount", prodCategoryCount);
+            request.setAttribute("prodLocationCount", prodLocationCount);;
             request.getRequestDispatcher("admin.jsp").forward(request, response);
         } else if (query.equals("complaints")){
             request.setAttribute("adminQuery","complaints");

@@ -27,11 +27,18 @@ public class ProductListing extends HttpServlet {
 
 
             List<Product> availableProductList = ProductDAO.getApprovedProducts();
+            System.out.println(availableProductList.size());
             request.setAttribute("availableProductList", availableProductList);
             request.setAttribute("category","allProducts");
             request.setAttribute("minPrice",0);
             request.setAttribute("maxPrice", 1000);
             request.setAttribute("sortBy","default");
+            if (request.getSession().getAttribute("user_id") != null){
+                int user_id = Integer.parseInt(String.valueOf(request.getSession().getAttribute("user_id")));
+                List<Product> recommendedProdList = ProductDAO.getRecommendedProductsByUserId(user_id) ;
+                request.setAttribute("recommendedProducts", recommendedProdList);
+            }
+
             request.getRequestDispatcher("productListing.jsp").forward(request, response);
         }
 

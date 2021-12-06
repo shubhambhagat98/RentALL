@@ -827,6 +827,11 @@ span.banner-subtitle{
     font-weight: bold;
 }
 
+.product-recommendations h6{
+    color: #043c88;
+    font-weight: bold;
+}
+
 /*.product-description p{*/
 /*    text-align: justify;*/
 /*    text-justify: inter-word;*/

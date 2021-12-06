@@ -38,15 +38,7 @@ public class DeleteProduct extends HttpServlet {
 
         List<String> imageList = ProductDAO.getAllImages(product_id);
         for (String image: imageList){
-//            file = new File(getServletContext().getRealPath("images") + File.separator + "products" + File.separator +image);
-//            if(file.delete())
-//            {
-//                System.out.println("File deleted successfully");
-//            }
-//            else
-//            {
-//                System.out.println("Failed to delete the file");
-//            }
+
 
 //            delete image from aws s3
             s3client.deleteObject(S3_BUCKET_NAME, image);

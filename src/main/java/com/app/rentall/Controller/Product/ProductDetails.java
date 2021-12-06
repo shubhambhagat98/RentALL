@@ -40,7 +40,8 @@ public class ProductDetails extends HttpServlet {
 
 
 
-
+        List<Product> recommendedProdList = ProductDAO.getSimilarProducts(product_id);
+        request.setAttribute("recommendedProducts",recommendedProdList);
 
 
 
