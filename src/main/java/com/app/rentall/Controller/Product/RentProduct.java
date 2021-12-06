@@ -44,7 +44,7 @@ public class RentProduct extends HttpServlet {
         Product product = ProductDAO.getProductById(product_id);
         User seller = DBLoginDAO.getUserById(product.getUser_id());
         User renter = DBLoginDAO.getUserById(user_id);
-        String destination = getServletContext().getRealPath("images") + File.separator + "products" + File.separator;
+        String destination = "https://rentallproductimage.s3.amazonaws.com/";
         assert renter != null;
 
 
