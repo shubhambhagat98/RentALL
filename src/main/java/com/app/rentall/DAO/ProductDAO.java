@@ -861,7 +861,7 @@ public class ProductDAO {
         try {
             con = DBUtil.getConnection();
             String selectQuery = "select * from product p2 where p2.prod_category in " +
-                    "(select DISTINCT p1.prod_category from rented_products rp join product p1 on p1.prod_id=rp.prod_id where rp.user_id='"+user_id+"') p2.prod_status = 'Available' LIMIT 4";
+                    "(select DISTINCT p1.prod_category from rented_products rp join product p1 on p1.prod_id=rp.prod_id where rp.user_id='"+user_id+"') and p2.prod_status = 'Available' LIMIT 4";
             ps = con.prepareStatement(selectQuery);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
