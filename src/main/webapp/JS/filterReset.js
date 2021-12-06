@@ -5,11 +5,14 @@ function resetFilter(){
     //reset state dropdown
     $("#stateId option:selected").removeAttr("selected");
     $("#stateId option:eq(0)").prop("selected", true); //set option of index 0 to selected
+    $("#stateId option:eq(0)").val("")
+    console.log($("#stateId option:eq(0)").val())
 
     //reset city dropdown
     $("#cityId option:selected").removeAttr("selected");
     $("#cityId option:eq(0)").prop("selected", true); //set option of index 0 to selected
-
+    $("#cityId option:eq(0)").val("");
+    console.log($("#cityId option:eq(0)").val())
 
 
     // reset rating checkbox
@@ -58,12 +61,16 @@ function resetFilter1(){
     //reset state dropdown
     $("#stateId1 option:selected").removeAttr("selected");
     $("#stateId1 option:eq(0)").prop("selected", true); //set option of index 0 to selected
+    $("#stateId1 option:eq(0)").val("");
+    console.log($("#stateId1 option:eq(0)").val())
+
 
     //reset city dropdown
     $("#cityId1 option:selected").removeAttr("selected");
     $("#cityId1 option:eq(0)").prop("selected", true); //set option of index 0 to selected
+    $("#cityId1 option:eq(0)").val("");
 
-
+    console.log($("#cityId1 option:eq(0)").val())
 
     // reset rating checkbox
     // $('input[name=rating_button]').removeAttr("checked");
