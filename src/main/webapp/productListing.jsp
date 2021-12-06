@@ -227,7 +227,7 @@
                     <div class="row mt-2 g-2">
                         <div class=" col-lg-2 col-3">
                             <select class="form-select" onChange="window.location.href=this.value" id="prod_category" name="prod_category">
-                                <option id="no-category" value="none" <c:if test="${requestScope.category == null || requestScope.category != ''}" >selected="selected" </c:if> >Select category</option>
+                                <option id="no-category" value="${pageContext.request.contextPath}/ProductListing?action=allProducts" <c:if test="${requestScope.category == null || requestScope.category != ''}" >selected="selected" </c:if> >Select category</option>
                                 <option value="${pageContext.request.contextPath}/ProductListing?action=allProducts" <c:if test="${requestScope.category == 'allProducts'}" >selected="selected" </c:if> >All Categories</option>
                                 <option value="${pageContext.request.contextPath}/SearchProduct?action=category&category=car" <c:if test="${requestScope.category == 'car'}" >selected="selected" </c:if>  >Car</option>
                                 <option value="${pageContext.request.contextPath}/SearchProduct?action=category&category=bike" <c:if test="${requestScope.category == 'bike'}" >selected="selected" </c:if> >Bike</option>
