@@ -93,7 +93,6 @@
                     <c:if test="${requestScope.product.prod_rating > 0.0}">
                         <div class="mt-2"><span class="stars" data-rating="${requestScope.product.prod_rating}" data-num-stars="5" ></span></div>
                     </c:if>
-                        <div class="mt-2"><span class="stars" data-rating="${requestScope.product.prod_rating}" data-num-stars="5" ></span></div>
                     <div class="mt-2"><span class="price">Price $${requestScope.product.prod_price}.00</span><span class="duration">/${requestScope.product.prod_duration}</span></div>
                     <div class="mt-2"><span class="info"><b>Category:</b> ${requestScope.product.prod_category}</span></div>
                     <div class="mt-2"><span class="info"><b>Status:</b> ${requestScope.product.prod_status}</span></div>
