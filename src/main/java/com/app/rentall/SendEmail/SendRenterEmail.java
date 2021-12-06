@@ -59,7 +59,7 @@ public class SendRenterEmail {
             //first part
             MimeBodyPart textPart1 = new MimeBodyPart();
             String text1 = "<h3>Following product has been added to your renting list</h3>" +
-                    "<img width=\"300\" height=\"170\" style=\"object-fit: contain\" src = \"cid:image\"><br>" +
+                    "<img width=\"300\" height=\"170\" style=\"object-fit: contain\" src = "+destination+product.getProd_firstImage()+"><br>" +
                     "<h3>Product Title: "+ product.getProd_title() +"</h3>" +
                     "<h3>Seller Information:</h3>" +
                     "<span><b>Name: </b>"+ seller.getFirst_name()+" "+seller.getLast_name() +" </span><br>" +
@@ -75,13 +75,13 @@ public class SendRenterEmail {
             textPart1.setContent(text1, "text/html");
             multipart.addBodyPart(textPart1);
 
-            //second part
-            MimeBodyPart product_image = new MimeBodyPart();
-            String image_path = destination+product.getProd_firstImage();
-            DataSource fds = new FileDataSource(image_path);
-            product_image.setDataHandler(new DataHandler(fds));
-            product_image.setHeader("Content-ID","<image>");
-            multipart.addBodyPart(product_image);
+//            //second part
+//            MimeBodyPart product_image = new MimeBodyPart();
+//            String image_path = destination+product.getProd_firstImage();
+//            DataSource fds = new FileDataSource(image_path);
+//            product_image.setDataHandler(new DataHandler(fds));
+//            product_image.setHeader("Content-ID","<image>");
+//            multipart.addBodyPart(product_image);
 
             // put everything together
             mess.setContent(multipart);
