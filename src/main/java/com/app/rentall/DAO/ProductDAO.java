@@ -730,10 +730,11 @@ public class ProductDAO {
             String selectQuery = "select * from product where prod_status = 'Available'";
 
 
+
             if (!category.equals("allProducts") && !category.equals("")){
                 selectQuery += " and prod_category = ?";
             } else if (!keyword.equals("")){
-                selectQuery += " and prod_category like ? or prod_title like ? or prod_description like ?";
+                selectQuery += " and (prod_category like ? or prod_title like ? or prod_description like ?)";
             }
 
             if (!state.equals("")){
@@ -824,6 +825,9 @@ public class ProductDAO {
         }finally {
             DBUtil.closeConnection(con);
         }
+
+        System.out.println("filter list size = "+productList.size());
+
         return productList;
 
 
