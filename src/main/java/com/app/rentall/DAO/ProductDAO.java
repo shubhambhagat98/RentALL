@@ -433,6 +433,42 @@ public class ProductDAO {
         return productList;
     }
 
+    // return list of rented products
+    public static List<Product> getRentedProductsAdmin(){
+        List<Product> productList = new ArrayList<Product>();
+        try {
+            con = DBUtil.getConnection();
+            String selectQuery = "select * from product where prod_status = 'Rented' and prod_id in (select prod_id from rented_products where status = 'open')";
+            ps = con.prepareStatement(selectQuery);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                Product product = new Product();
+                product.setProd_id(rs.getInt("prod_id"));
+                product.setProd_title(rs.getString("prod_title"));
+                product.setProd_description(rs.getString("prod_description"));
+                product.setProd_category(rs.getString("prod_category"));
+                product.setProd_price(rs.getInt("prod_price"));
+                product.setProd_duration(rs.getString("prod_duration"));
+                product.setProd_street_address(rs.getString("prod_street_address"));
+                product.setProd_city(rs.getString("prod_city"));
+                product.setProd_state(rs.getString("prod_state"));
+                product.setProd_pincode(rs.getInt("prod_pincode"));
+                product.setProd_status(rs.getString("prod_status"));
+                product.setUser_id(rs.getInt("user_id"));
+                product.setProd_firstImage(getFirstImage(rs.getInt("prod_id")));
+                product.setProd_rating(getAverageRating(rs.getInt("prod_id")));
+                System.out.println(product);
+                productList.add(product);
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            DBUtil.closeConnection(con);
+        }
+        return productList;
+    }
+
 
 
     //get rented product details

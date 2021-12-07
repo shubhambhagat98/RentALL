@@ -15,6 +15,7 @@ import java.util.List;
 public class Admin extends HttpServlet {
 
     static List<Product> pendingProductList;
+    static List<Product> rentedProductList;
     static String prodCategoryCount;
     static String prodLocationCount;
 
@@ -30,9 +31,11 @@ public class Admin extends HttpServlet {
         if (query.equals("productList")){
 //            session.setAttribute("adminQuery",);
             pendingProductList = ProductDAO.getNotApprovedProducts();
+            rentedProductList = ProductDAO.getRentedProductsAdmin();
             System.out.println("product list size: "+pendingProductList.size());
             request.setAttribute("adminQuery","productList");
             request.setAttribute("pendingProductList", pendingProductList);
+            request.setAttribute("rentedProductList", rentedProductList);
             request.getRequestDispatcher("admin.jsp").forward(request, response);
         } else if (query.equals("analytics")){
             prodCategoryCount = ProductDAO.getProductCategoryCount();

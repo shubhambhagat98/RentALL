@@ -100,6 +100,21 @@ public class ProductDetails extends HttpServlet {
             request.setAttribute("lat", latAndLng.getLat());
             request.setAttribute("lng",latAndLng.getLng());
             request.getRequestDispatcher("notApprovedProduct.jsp").forward(request, response);
+
+        } else if (request.getParameter("action").equals("rentedProductAdminView")){
+            System.out.println("inside rented product admin view condition");
+            RentedProduct rentedProduct = ProductDAO.getRentedProductDetails(product_id);
+            assert rentedProduct != null;
+            User renter = DBLoginDAO.getUserById(rentedProduct.getUser_id());
+            request.setAttribute("product", product);
+            request.setAttribute("seller", seller);
+            request.setAttribute("renter",renter);
+            request.setAttribute("rentedProduct",rentedProduct);
+            request.setAttribute("imageFileList", imageFileList);
+            request.setAttribute("reviewList", reviewList);
+            request.setAttribute("lat", latAndLng.getLat());
+            request.setAttribute("lng",latAndLng.getLng());
+            request.getRequestDispatcher("rentedProductAdminView.jsp").forward(request, response);
         }
 
 
