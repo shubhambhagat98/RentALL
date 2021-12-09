@@ -24,7 +24,7 @@ public class ChatDAO {
         try {
             con = DBUtil.getConnection();
 //            String selectQuery = "SELECT * FROM message WHERE from_user = ? or to_user = ? AND chat_time IN (SELECT MAX(chat_time) FROM message GROUP by token) ORDER BY chat_time DESC";
-            String selectQuery = "SELECT * FROM message where chat_time IN (SELECT MAX(chat_time) FROM message GROUP by token) and token in (select token from message where from_user = ? or to_user = ?) ORDER BY chat_time DESC";
+            String selectQuery = "SELECT * FROM message where chat_time IN (SELECT MAX(chat_time) FROM message GROUP by token) and token in (select token from message where from_user_id = ? or to_user_id = ?) ORDER BY chat_time DESC";
             ps = con.prepareStatement(selectQuery);
             ps.setInt(1, user_id);
             ps.setInt(2, user_id);
@@ -33,8 +33,10 @@ public class ChatDAO {
             while (rs.next()){
                 Message message = new Message();
                 message.setChat_id(rs.getInt("chat_id"));
-                message.setFrom_user(DBLoginDAO.getUserById(rs.getInt("from_user")));
-                message.setTo_user(DBLoginDAO.getUserById(rs.getInt("to_user")));
+                message.setFrom_user_id(rs.getInt("from_user_id"));
+                message.setFrom_user_name(rs.getString("from_user_name"));
+                message.setTo_user_id(rs.getInt("to_user_id"));
+                message.setTo_user_name(rs.getString("to_user_name"));
                 message.setMessage(rs.getString("message"));
                 message.setChat_time(rs.getString("chat_time"));
                 message.setToken(rs.getInt("token"));
@@ -55,7 +57,7 @@ public class ChatDAO {
         ResultSet rs1 = null;
         try {
             con = DBUtil.getConnection();
-            String selectQuery = "SELECT * FROM message WHERE (from_user = ? OR to_user = ?) AND (from_user = ? OR to_user = ?) ORDER BY chat_time";
+            String selectQuery = "SELECT * FROM message WHERE (from_user_id = ? OR to_user_id = ?) AND (from_user_id = ? OR to_user_id = ?) ORDER BY chat_time";
             ps = con.prepareStatement(selectQuery);
             ps.setInt(1, fromUserID);
             ps.setInt(2, fromUserID);
@@ -64,10 +66,12 @@ public class ChatDAO {
             rs1 = ps.executeQuery();
             while (rs1.next()){
                 Message message = new Message();
-                message.setMessage(rs1.getString("message"));
                 message.setChat_id(rs1.getInt("chat_id"));
-                message.setFrom_user(DBLoginDAO.getUserById(rs1.getInt("from_user")));
-                message.setTo_user(DBLoginDAO.getUserById(rs1.getInt("to_user")));
+                message.setFrom_user_id(rs1.getInt("from_user_id"));
+                message.setFrom_user_name(rs1.getString("from_user_name"));
+                message.setTo_user_id(rs1.getInt("to_user_id"));
+                message.setTo_user_name(rs1.getString("to_user_name"));
+                message.setMessage(rs1.getString("message"));
                 message.setChat_time(rs1.getString("chat_time"));
                 message.setToken(rs1.getInt("token"));
                 messageList.add(message);
@@ -95,8 +99,10 @@ public class ChatDAO {
             while (rs.next()){
                 Message message = new Message();
                 message.setChat_id(rs.getInt("chat_id"));
-                message.setFrom_user(DBLoginDAO.getUserById(rs.getInt("from_user")));
-                message.setTo_user(DBLoginDAO.getUserById(rs.getInt("to_user")));
+                message.setFrom_user_id(rs.getInt("from_user_id"));
+                message.setFrom_user_name(rs.getString("from_user_name"));
+                message.setTo_user_id(rs.getInt("to_user_id"));
+                message.setTo_user_name(rs.getString("to_user_name"));
                 message.setMessage(rs.getString("message"));
                 message.setChat_time(rs.getString("chat_time"));
                 message.setToken(rs.getInt("token"));
@@ -112,16 +118,18 @@ public class ChatDAO {
 
 
     // insert message into DB
-    public static int insertMessage(int fromUserID, int toUserID, String message, int token){
+    public static int insertMessage(int fromUserID, String fromUserName, int toUserID,String toUserName, String message, int token){
         int status = 0;
         try {
             con = DBUtil.getConnection();
-            String insertQuery = "INSERT INTO message(from_user, to_user, message, token) VALUES (?,?,?,?)";
+            String insertQuery = "INSERT INTO message(from_user_id, from_user_name, to_user_id, to_user_name, message, token) VALUES (?,?,?,?,?,?)";
             ps = con.prepareStatement(insertQuery);
             ps.setInt(1, fromUserID);
-            ps.setInt(2, toUserID);
-            ps.setString(3, message);
-            ps.setInt(4, token);
+            ps.setString(2, fromUserName);
+            ps.setInt(3, toUserID);
+            ps.setString(4, toUserName);
+            ps.setString(5, message);
+            ps.setInt(6, token);
             status = ps.executeUpdate();
         }catch (Exception e){
             e.printStackTrace();
@@ -145,7 +153,7 @@ public class ChatDAO {
         try {
 
             con = DBUtil.getConnection();
-            String selectQuery = "select token from message  WHERE (from_user = ? OR to_user = ?) AND (from_user = ? OR to_user = ?)";
+            String selectQuery = "select token from message  WHERE (from_user_id = ? OR to_user_id = ?) AND (from_user_id = ? OR to_user_id = ?)";
             ps = con.prepareStatement(selectQuery);
             ps.setInt(1, fromUserID);
             ps.setInt(2, fromUserID);

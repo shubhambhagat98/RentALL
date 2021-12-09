@@ -44,14 +44,14 @@ public class SearchProduct extends HttpServlet {
             int maxPrice = Integer.parseInt(request.getParameter("maxPrice"));
             String sortBy = request.getParameter("sortBy");
 
-            System.out.println("category: "+category);
-            System.out.println("keyword: "+keyword);
-            System.out.println("state: "+prod_state);
-            System.out.println("city: "+prod_city);
-            System.out.println("rating: "+rating);
-            System.out.println("min price: "+minPrice);
-            System.out.println("max price: "+maxPrice);
-            System.out.println("sort by price: "+sortBy);
+//            System.out.println("category: "+category);
+//            System.out.println("keyword: "+keyword);
+//            System.out.println("state: "+prod_state);
+//            System.out.println("city: "+prod_city);
+//            System.out.println("rating: "+rating);
+//            System.out.println("min price: "+minPrice);
+//            System.out.println("max price: "+maxPrice);
+//            System.out.println("sort by price: "+sortBy);
 
             List<Product> availableProductList = ProductDAO.filterProducts(category,keyword, prod_state, prod_city, rating, minPrice, maxPrice, sortBy);
             request.setAttribute("availableProductList", availableProductList);

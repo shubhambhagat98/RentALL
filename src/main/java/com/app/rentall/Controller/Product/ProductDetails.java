@@ -22,12 +22,12 @@ public class ProductDetails extends HttpServlet {
         System.out.println("inside product details");
         // get all details of product
         Product product = ProductDAO.getProductById(product_id);
-        System.out.println("product details: "+product);
+
 
         // get details of seller
         User seller = DBLoginDAO.getUserById(product.getUser_id());
         assert seller != null;
-        System.out.println("Seller details: "+seller.getEmail_id());
+
 
         // get all images of product
         List<String> imageFileList = ProductDAO.getAllImages(product_id);
@@ -47,7 +47,7 @@ public class ProductDetails extends HttpServlet {
 
         if (request.getParameter("action").equals("availableProduct")){
 
-            System.out.println("product rating:"+product.getProd_rating());
+
             request.setAttribute("product", product);
             request.setAttribute("seller", seller);
             request.setAttribute("imageFileList", imageFileList);
@@ -57,7 +57,7 @@ public class ProductDetails extends HttpServlet {
             request.getRequestDispatcher("availableProduct.jsp").forward(request, response);
 
         }else if (request.getParameter("action").equals("yourProduct")){
-            System.out.println("inside your product if condition");
+
             RentedProduct rentedProduct = ProductDAO.getRentedProductDetails(product_id);
             if (rentedProduct != null){
                 User renter = DBLoginDAO.getUserById(rentedProduct.getUser_id());
@@ -78,7 +78,7 @@ public class ProductDetails extends HttpServlet {
             request.getRequestDispatcher("YourProduct.jsp").forward(request, response);
 
         }else  if (request.getParameter("action").equals("rentedProductsByYou")){
-            System.out.println("inside rented product by you condition");
+
             RentedProduct rentedProduct = ProductDAO.getRentedProductDetails(product_id);
             assert rentedProduct != null;
             User renter = DBLoginDAO.getUserById(rentedProduct.getUser_id());
@@ -102,7 +102,7 @@ public class ProductDetails extends HttpServlet {
             request.getRequestDispatcher("notApprovedProduct.jsp").forward(request, response);
 
         } else if (request.getParameter("action").equals("rentedProductAdminView")){
-            System.out.println("inside rented product admin view condition");
+
             RentedProduct rentedProduct = ProductDAO.getRentedProductDetails(product_id);
             assert rentedProduct != null;
             User renter = DBLoginDAO.getUserById(rentedProduct.getUser_id());

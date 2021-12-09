@@ -20,8 +20,6 @@ public class AddComplaint extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("inside add complaint");
-
         int user_id = Integer.parseInt(String.valueOf(request.getSession().getAttribute("user_id")));
         int seller_id = Integer.parseInt(request.getParameter("seller_id"));
         int product_id = Integer.parseInt(request.getParameter("product_id"));
@@ -38,10 +36,8 @@ public class AddComplaint extends HttpServlet {
         complaint.setProduct(product);
         complaint.setDescription(complaint_description);
         complaint.setDate(date);
-        System.out.println(complaint);
 
         int status = ProductDAO.addComplaint(complaint);
-        System.out.println(status);
 
         String prev_action = request.getParameter("prev_action");
         if (prev_action.equals("availableProduct")){

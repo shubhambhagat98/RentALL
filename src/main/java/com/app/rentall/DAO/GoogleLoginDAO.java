@@ -74,7 +74,7 @@ public class GoogleLoginDAO {
             ResultSet rs1 = ps.executeQuery();
             if (rs1.next()){
                 max_user_id = rs1.getInt("max(user_id)");
-                System.out.println("last user id for google login: "+ max_user_id);
+//                System.out.println("last user id for google login: "+ max_user_id);
             }
 
             String selectUserQuery = "select * from user where user_id = ?";

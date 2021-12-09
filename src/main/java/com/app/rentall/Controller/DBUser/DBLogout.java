@@ -9,7 +9,6 @@ import java.io.IOException;
 public class DBLogout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("inside DB Logout");
         HttpSession session = request.getSession();
         session.invalidate();
         response.sendRedirect("index.jsp");
@@ -17,7 +16,6 @@ public class DBLogout extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("inside DB Logout");
         HttpSession session = request.getSession();
         session.invalidate();
         response.sendRedirect("index.jsp");

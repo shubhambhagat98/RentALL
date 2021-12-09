@@ -88,7 +88,7 @@ public class SendRenterEmail {
 
 
 
-            System.out.println("sending renter mail");
+
             // Send message
             Transport.send(mess);
 

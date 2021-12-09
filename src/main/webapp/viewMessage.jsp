@@ -52,7 +52,7 @@
                 <c:choose>
                     <c:when test="${not empty requestScope.messageList}">
                         <c:forEach var="message" items="${requestScope.messageList}">
-                            <c:if test="${message.from_user.user_id == sessionScope.user_id}">
+                            <c:if test="${message.from_user_id == sessionScope.user_id}">
                                 <div class="row justify-content-end mt-3">
                                     <div class="col-8 alert-primary chat-message" role="alert">
                                         <h5>Me</h5>
@@ -62,10 +62,10 @@
                                 </div>
                             </c:if>
 
-                            <c:if test="${message.from_user.user_id != sessionScope.user_id}">
+                            <c:if test="${message.from_user_id != sessionScope.user_id}">
                                 <div class="row justify-content-start mt-3">
                                     <div class="col-8 alert-secondary chat-message" role="alert">
-                                        <h5>${message.from_user.first_name} ${message.from_user.last_name}</h5>
+                                        <h5>${message.from_user_name}</h5>
 <%--                                        <h5>${message.from_user.email_id}</h5>--%>
                                         <p>${message.message}</p>
 <%--                                        <p style="text-align: right;">${message.chat_time}</p>--%>
@@ -87,7 +87,7 @@
             <div class="type_msg" style="padding-left: 20px; padding-right: 25px;">
                 <form method="post" action="${pageContext.request.contextPath}/AddMessage">
                     <div class="input_msg_write">
-                        <input type="hidden" name="to_user" value="${requestScope.to_user.user_id}" />
+                        <input type="hidden" name="to_user" value="${requestScope.to_user}" />
                         <input type="text" name="message" class="write_msg" placeholder="Type a message" style="padding: 5px; border-radius: 20px; outline: none" />
                         <button class="msg_send_btn" type="submit" style="margin-right: 35px; margin-top: -2px; outline: none;">
                             <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
@@ -121,7 +121,7 @@
         var interval = setInterval(function (){
             $.ajax({
                 type: 'POST',
-                data : {to_user_id: '${requestScope.to_user.user_id}'},
+                data : {to_user_id: '${requestScope.to_user}'},
                 url:'${pageContext.request.contextPath}/ViewMessage',
                 success: function (responseXml){
                     // var string1 = JSON.stringify(messageList);

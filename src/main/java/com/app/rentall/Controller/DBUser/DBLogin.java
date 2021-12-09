@@ -19,7 +19,6 @@ public class DBLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        System.out.println("inside login servlet");
         String email_id = request.getParameter("email_id");
         String password  = request.getParameter("password");
 
@@ -39,8 +38,6 @@ public class DBLogin extends HttpServlet {
             session.setAttribute("type", loggedInUser.getType());
             response.sendRedirect("index.jsp");
         }else {
-//            request.setAttribute("login_error", true);
-//            request.getRequestDispatcher("login.jsp").forward(request, response);
             session.setAttribute("loginError",true);
             response.sendRedirect("login.jsp");
         }

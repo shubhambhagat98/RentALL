@@ -88,10 +88,6 @@ public class AddProduct1 extends HttpServlet {
 
         BasicAWSCredentials awsCredentials = new BasicAWSCredentials(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY);
 
-        System.out.println(awsCredentials);
-
-//        AmazonS3 s3client = new AmazonS3Client(awsCredentials);
-//        AmazonS3 s3client = new AmazonS3Client(new ProfileCredentialsProvider());
         AmazonS3 s3client = AmazonS3ClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
                 .withRegion(Regions.CA_CENTRAL_1)
@@ -99,16 +95,11 @@ public class AddProduct1 extends HttpServlet {
 
 
         if (status == 1){
-            System.out.println("inside add product servlet, adding image");
-
-
-
 
             for (Part image: imageFileList){
                 if (image.getSubmittedFileName() != null ){
                     try {
 
-                        System.out.println("Image file name: "+image.getSubmittedFileName());
                         date = String.valueOf(java.time.LocalDate.now());
                         time = String.valueOf(java.time.LocalTime.now());
 
@@ -122,15 +113,10 @@ public class AddProduct1 extends HttpServlet {
                         PutObjectRequest putObjectRequest = new PutObjectRequest(S3_BUCKET_NAME, keyName, is , om);
                         putObjectRequest.withCannedAcl(CannedAccessControlList.PublicRead);
                         s3client.putObject(putObjectRequest);
-//                        s3client.setObjectAcl(S3_BUCKET_NAME, keyName, CannedAccessControlList.PublicRead);
-                        System.out.println("image successfully uploaded in aws s3");
 
 
                         // save image name in database
                         int imgStatus = ProductDAO.addImage(keyName);
-                        System.out.println("image successfully added in the database");
-
-
 
                     }catch (IOException e) {
                         e.printStackTrace();

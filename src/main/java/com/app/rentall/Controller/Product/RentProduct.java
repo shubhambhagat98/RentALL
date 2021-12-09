@@ -28,12 +28,8 @@ public class RentProduct extends HttpServlet {
         String endDate = request.getParameter("endDate");
         int product_id = Integer.parseInt(request.getParameter("product_id"));
         int user_id = Integer.parseInt(String.valueOf(request.getSession().getAttribute("user_id")));
-        System.out.println(request.getParameter("total_cost"));
         float total_cost = Float.parseFloat(request.getParameter("total_cost"));
-        System.out.println(startDate);
-        System.out.println(endDate);
-        System.out.println(product_id);
-        System.out.println(user_id);
+
 
         RentedProduct rentedProduct = new RentedProduct(product_id, user_id, startDate,endDate, total_cost, "open");
         int status = ProductDAO.rentProduct(rentedProduct);
@@ -51,9 +47,9 @@ public class RentProduct extends HttpServlet {
         new Thread(new Runnable() {
             public void run() {
                boolean test = SendRenterEmail.sendRenterEmail(renter, seller, product, rentedProduct, destination);
-                if (test){
-                    System.out.println("renter email sent successfully");
-                }
+//                if (test){
+//                    System.out.println("renter email sent successfully");
+//                }
 
             }
         }).start();
@@ -63,7 +59,7 @@ public class RentProduct extends HttpServlet {
 
         HttpSession session = request.getSession();
         session.setAttribute("rentProduct", true);
-        System.out.println("calling my account");
+//        System.out.println("calling my account");
         response.sendRedirect(request.getContextPath()+"/MyAccount");
 
 

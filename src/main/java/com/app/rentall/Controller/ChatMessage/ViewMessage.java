@@ -31,37 +31,30 @@ public class ViewMessage extends HttpServlet {
         }else if (action.equals("getMessageById")){
             int to_user_id = Integer.parseInt(request.getParameter("to_user_id"));
             messageList = ChatDAO.getMessageById(user_id, to_user_id);
-            User to_user = DBLoginDAO.getUserById(to_user_id);
-            request.setAttribute("to_user", to_user);
+
         }
 
 
 
         int to_user_id = Integer.parseInt(request.getParameter("to_user_id"));
-        User to_user = DBLoginDAO.getUserById(to_user_id);
-        request.setAttribute("to_user", to_user);
+
+        request.setAttribute("to_user", to_user_id);
         request.setAttribute("messageList", messageList);
         request.getRequestDispatcher("viewMessage.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        System.out.println("ajax call to doPost");
+
         int to_user_id = Integer.parseInt(request.getParameter("to_user_id"));
         int user_id = Integer.parseInt(String.valueOf(request.getSession().getAttribute("user_id")));
         List<Message> messageList= ChatDAO.getMessageById(user_id, to_user_id);
-        User to_user = DBLoginDAO.getUserById(to_user_id);
-        request.setAttribute("to_user", to_user);
+        request.setAttribute("to_user", to_user_id);
         request.setAttribute("messageList", messageList);
         request.getRequestDispatcher("chatMessage.jsp").forward(request, response);
 
 
-//        Gson gson = new Gson();
-//        response.setContentType("application/json");
-//        PrintWriter out = response.getWriter();
-//        out.print(gson.toJson(messageList));
-//        out.flush();
-//        out.close();
+
 
 
     }

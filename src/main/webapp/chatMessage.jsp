@@ -7,7 +7,7 @@
     <c:choose>
         <c:when test="${not empty requestScope.messageList}">
             <c:forEach var="message" items="${requestScope.messageList}">
-                <c:if test="${message.from_user.user_id == sessionScope.user_id}">
+                <c:if test="${message.from_user_id == sessionScope.user_id}">
                     <div class="row justify-content-end mt-3">
                         <div class="col-8 alert-primary chat-message" role="alert">
                             <h5>Me</h5>
@@ -17,10 +17,10 @@
                     </div>
                 </c:if>
 
-                <c:if test="${message.from_user.user_id != sessionScope.user_id}">
+                <c:if test="${message.from_user_id != sessionScope.user_id}">
                     <div class="row justify-content-start mt-3">
                         <div class="col-8 alert-secondary chat-message" role="alert">
-                            <h5>${message.from_user.first_name} ${message.from_user.last_name}</h5>
+                            <h5>${message.from_user_name}</h5>
                                 <%--                                        <h5>${message.from_user.email_id}</h5>--%>
                             <p>${message.message}</p>
                                 <%--                                        <p style="text-align: right;">${message.chat_time}</p>--%>

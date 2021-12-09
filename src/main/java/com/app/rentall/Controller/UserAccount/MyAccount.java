@@ -13,17 +13,12 @@ import java.util.List;
 public class MyAccount extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        List<Product> approvedProductList = ProductDAO.getApprovedProducts();
-//        List<Product> notApprovedProductList = ProductDAO.getNotApprovedProducts();
 
-//        request.setAttribute("approvedProductList", approvedProductList);
-//        request.setAttribute("notApprovedProductList", notApprovedProductList);
-//        request.setAttribute("rentedProductList", rentedProductList);
 
         List<Product> yourProductList = ProductDAO.getProductsByUserId(String.valueOf(request.getSession().getAttribute("user_id")));
         int user_id = Integer.parseInt(String.valueOf(request.getSession().getAttribute("user_id")));
         List<Product> rentedProductList = ProductDAO.getRentedProducts(user_id);
-        System.out.println("rented product list size: "+rentedProductList.size());
+
 
         request.setAttribute("yourProductList", yourProductList);
         request.setAttribute("rentedProductList", rentedProductList);

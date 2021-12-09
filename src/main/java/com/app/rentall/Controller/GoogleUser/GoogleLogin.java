@@ -27,10 +27,6 @@ public class GoogleLogin extends HttpServlet {
             GoogleIdToken.Payload payload = IdTokenVerifierAndParser.getPayload(id_token);
             String name = (String) payload.get("name");
             String email_id = payload.getEmail();
-
-            System.out.println("User name: " + name);
-            System.out.println("User email: " + email_id);
-            System.out.println(id_token);
             String first_name = name.split(" ")[0];
             String last_name = name.split(" ")[1];
 
@@ -43,7 +39,6 @@ public class GoogleLogin extends HttpServlet {
                 session.setAttribute("last_name", checkedUser.getLast_name());
                 session.setAttribute("email_id", checkedUser.getEmail_id());
                 session.setAttribute("type", checkedUser.getType());
-                System.out.println("user: "+checkedUser);
                 response.sendRedirect("index.jsp");
             } else {
 

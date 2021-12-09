@@ -52,19 +52,19 @@
         <c:choose>
             <c:when test="${not empty requestScope.messageList}">
                 <c:forEach var="message" items="${requestScope.messageList}">
-                    <c:if test="${message.from_user.user_id == sessionScope.user_id}">
+                    <c:if test="${message.from_user_id == sessionScope.user_id}">
                         <div class="card mt-3">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-1  col-2" >
                                         <div class="circle">
-                                            <span class="avatar-text">${fn:substring(message.to_user.first_name, 0, 1)}</span>
+                                            <span class="avatar-text">${fn:substring(message.to_user_name, 0, 1)}</span>
                                         </div>
 
                                     </div>
-                                    <div class="col-md-11  col-10" style="cursor: pointer;" onclick="window.location.href = '${pageContext.request.contextPath}/ViewMessage?action=getMessageByToken&token=${message.token}&to_user_id=${message.to_user.user_id}'" >
+                                    <div class="col-md-11  col-10" style="cursor: pointer;" onclick="window.location.href = '${pageContext.request.contextPath}/ViewMessage?action=getMessageByToken&token=${message.token}&to_user_id=${message.to_user_id}'" >
                                         <h5 class="card-title">
-                                            ${message.to_user.first_name} ${message.to_user.last_name}
+                                            ${message.to_user_name}
 <%--                                                ${message.to_user.user_id}--%>
 <%--                                                ${message.to_user.email_id}--%>
                                         </h5>
@@ -76,18 +76,18 @@
                         </div>
                     </c:if>
 
-                    <c:if test="${message.from_user.user_id != sessionScope.user_id}">
+                    <c:if test="${message.from_user_id != sessionScope.user_id}">
                         <div class="card mt-3 ">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-1  col-2">
                                         <div class="circle">
-                                            <span class="avatar-text">${fn:substring(message.from_user.first_name, 0, 1)}</span>
+                                            <span class="avatar-text">${fn:substring(message.from_user_name, 0, 1)}</span>
                                         </div>
                                     </div>
-                                    <div class="col-md-11  col-10" style="cursor: pointer;" onclick="window.location.href = '${pageContext.request.contextPath}/ViewMessage?action=getMessageByToken&token=${message.token}&to_user_id=${message.from_user.user_id}'" >
+                                    <div class="col-md-11  col-10" style="cursor: pointer;" onclick="window.location.href = '${pageContext.request.contextPath}/ViewMessage?action=getMessageByToken&token=${message.token}&to_user_id=${message.from_user_id}'" >
                                         <h5 class="card-title">
-                                                ${message.from_user.first_name} ${message.from_user.last_name}
+                                                ${message.from_user_name}
 <%--                                                     ${message.to_user.user_id}--%>
 <%--                                                    ${message.from_user.email_id}--%>
                                         </h5>

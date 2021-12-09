@@ -42,7 +42,7 @@ public class DeleteProduct extends HttpServlet {
 
 //            delete image from aws s3
             s3client.deleteObject(S3_BUCKET_NAME, image);
-            System.out.println(image+" deleted from aws s3");
+
 
 
 
@@ -53,8 +53,7 @@ public class DeleteProduct extends HttpServlet {
         int status3 = ProductDAO.deleteProduct(product_id);
         int status4 = ProductDAO.deleteReview(product_id);
         int status5 = ProductDAO.deleteComplaint(product_id);
-        System.out.println("inside delete servlet");
-        System.out.println("product id: "+product_id);
+
         response.sendRedirect(request.getContextPath()+"/MyAccount");
 
 

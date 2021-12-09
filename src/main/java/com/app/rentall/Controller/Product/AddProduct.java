@@ -25,11 +25,9 @@ public class AddProduct extends HttpServlet {
 // demo comment to push
 
         String prod_title = request.getParameter("prod_title");
-        System.out.println(request.getParameter("prod_title"));
         String prod_description = request.getParameter("prod_description");
         String prod_category = request.getParameter("prod_category");
         String prod_duration = request.getParameter("prod_duration");
-        System.out.println(request.getParameter("prod_price"));
         int prod_price = Integer.parseInt(request.getParameter("prod_price"));
         String prod_street_address = request.getParameter("street_address");
         String prod_state = request.getParameter("state");
@@ -37,7 +35,6 @@ public class AddProduct extends HttpServlet {
         int prod_pincode = Integer.parseInt(request.getParameter("pincode"));
         Collection<Part> imageFileList = request.getParts();
 
-        System.out.println("session user id: "+ request.getSession().getAttribute("user_id"));
         int user_id = Integer.parseInt(String.valueOf(request.getSession().getAttribute("user_id")));
         String destination = null;
         FileOutputStream fos = null;
@@ -63,12 +60,12 @@ public class AddProduct extends HttpServlet {
         int status = ProductDAO.addProduct(product);
 
         if (status == 1){
-            System.out.println("inside add product servlet, adding image");
+
             for (Part image: imageFileList){
                 if (image.getSubmittedFileName() != null){
                     try {
                         // save actual image in image/products folder
-                        System.out.println("Image file name: "+image.getSubmittedFileName());
+
                         date = String.valueOf(java.time.LocalDate.now());
                         time = String.valueOf(java.time.LocalTime.now());
                         destination = getServletContext().getRealPath("images") + File.separator + "products" + File.separator + user_id + "_" + date + "_" + time + "_" +image.getSubmittedFileName();
@@ -93,7 +90,6 @@ public class AddProduct extends HttpServlet {
             }
 
             response.sendRedirect(request.getContextPath()+"/MyAccount");
-//          response.sendRedirect("account.jsp");
 
         }else {
             HttpSession session = request.getSession();

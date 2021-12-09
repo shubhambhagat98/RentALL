@@ -23,16 +23,12 @@ public class Admin extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String query = request.getParameter("adminQuery");
-        System.out.println("inside admin :"+query);
 
-//        HttpSession session = request.getSession();
-//        session.removeAttribute("adminQuery");
 
         if (query.equals("productList")){
 //            session.setAttribute("adminQuery",);
             pendingProductList = ProductDAO.getNotApprovedProducts();
             rentedProductList = ProductDAO.getRentedProductsAdmin();
-            System.out.println("product list size: "+pendingProductList.size());
             request.setAttribute("adminQuery","productList");
             request.setAttribute("pendingProductList", pendingProductList);
             request.setAttribute("rentedProductList", rentedProductList);
@@ -48,7 +44,6 @@ public class Admin extends HttpServlet {
             request.setAttribute("adminQuery","complaints");
             List<Complaint> complaintList = ProductDAO.getAllComplaints();
             request.setAttribute("complaintList", complaintList);
-            System.out.println("complaint list size"+complaintList.size());
             request.getRequestDispatcher("admin.jsp").forward(request, response);
         }
 

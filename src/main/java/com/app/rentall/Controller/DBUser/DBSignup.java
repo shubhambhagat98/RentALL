@@ -28,8 +28,6 @@ public class DBSignup extends HttpServlet {
         String security_2 = request.getParameter("security_2").toLowerCase();
         String security_3 = request.getParameter("security_3").toLowerCase();
 
-        System.out.println("inside db signup servlet");
-
 
         //generate hashed password
         String hashedPassword = DigestUtils.sha256Hex(password);

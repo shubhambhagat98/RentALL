@@ -17,17 +17,12 @@ public class ProductListing extends HttpServlet {
 
         if (request.getParameter("action").equals("allProducts")){
 
-            System.out.println("inside product listing");
-//            System.out.println("category: "+request.getParameter("category"));
-//            System.out.println("keyword: "+request.getParameter("keyword"));
 
-            if (request.getParameter("category") != null){
-                System.out.println(request.getParameter("category").isEmpty());
-            }
+
+
 
 
             List<Product> availableProductList = ProductDAO.getApprovedProducts();
-            System.out.println(availableProductList.size());
             request.setAttribute("availableProductList", availableProductList);
             request.setAttribute("category","allProducts");
             request.setAttribute("minPrice",0);

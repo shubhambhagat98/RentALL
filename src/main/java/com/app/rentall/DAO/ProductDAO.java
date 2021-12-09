@@ -421,7 +421,6 @@ public class ProductDAO {
                 product.setUser_id(rs.getInt("user_id"));
                 product.setProd_firstImage(getFirstImage(rs.getInt("prod_id")));
                 product.setProd_rating(getAverageRating(rs.getInt("prod_id")));
-                System.out.println(product);
                 productList.add(product);
 
             }
@@ -799,7 +798,7 @@ public class ProductDAO {
 
             }
 
-            System.out.println(ps);
+//            System.out.println(ps);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -826,7 +825,7 @@ public class ProductDAO {
             DBUtil.closeConnection(con);
         }
 
-        System.out.println("filter list size = "+productList.size());
+//        System.out.println("filter list size = "+productList.size());
 
         return productList;
 

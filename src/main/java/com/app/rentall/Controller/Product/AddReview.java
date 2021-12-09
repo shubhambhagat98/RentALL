@@ -19,7 +19,6 @@ public class AddReview extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("inside add review");
         // Fetching the inputs
         int product_id = Integer.parseInt(request.getParameter("product_id"));
         String review_title = request.getParameter("review_title");
@@ -40,10 +39,10 @@ public class AddReview extends HttpServlet {
         assert userReviewer != null;
         review.setReviewer_name(userReviewer.getFirst_name()+" "+userReviewer.getLast_name());
 
-        System.out.println(review);
+
 
         int status = ProductDAO.addReview(review);
-        System.out.println(status);
+
 
         String prev_action = request.getParameter("prev_action");
         if (prev_action.equals("availableProduct")){

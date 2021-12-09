@@ -16,7 +16,7 @@ public class GeoCodeImplementation {
     private static final String API_KEY = "AIzaSyBMBgnNGsl68y8KN5ATgoj_GlvI58NFDE8";
 
     public static LatAndLng getLatandLang(String address) throws java.io.IOException, JSONException {
-        System.out.println("inside lat long");
+
         LatAndLng latAndLng = new LatAndLng();
         URL url = new URL(URL + "?address=" + URLEncoder.encode(address, "UTF-8") + "&sensor=false," + "CA&key=" + API_KEY);
         URLConnection connection = url.openConnection();
