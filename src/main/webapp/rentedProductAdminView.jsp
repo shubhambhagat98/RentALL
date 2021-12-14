@@ -21,7 +21,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="359199286110-ji2g5fkkf1ktpjhoadqejfprcks90vlr.apps.googleusercontent.com"/>
+    <%--    PUT YOUR GOOGLE OAUTH CLIENT ID--%>
+    <meta name="google-signin-client_id" content="PUT_YOUR_CLIENT_ID.apps.googleusercontent.com"/>
     <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
     <script type="application/javascript" src="JS/signout.js"></script>
     <script type="application/javascript" src="JS/rating.js"></script>
@@ -68,12 +69,14 @@
                             <c:choose>
                                 <c:when test="${count == 0}">
                                     <div class="carousel-item single-product-image active">
-                                        <img class="img-fluid" src="https://rentallproductimage.s3.amazonaws.com/${image}" alt="">
+                                            <%-- PUT YOUR BUCKET NAME --%>
+                                        <img class="img-fluid" src="https://PUT_YOUR_AWS_BUCKET_NAME.s3.amazonaws.com/${image}" alt="">
                                     </div>
                                 </c:when>
                                 <c:otherwise>
                                     <div class="carousel-item single-product-image">
-                                        <img class="img-fluid" src="https://rentallproductimage.s3.amazonaws.com/${image}" alt="">
+                                            <%-- PUT YOUR BUCKET NAME --%>
+                                        <img class="img-fluid" src="https://PUT_YOUR_AWS_BUCKET_NAME.s3.amazonaws.com/${image}" alt="">
                                     </div>
                                 </c:otherwise>
                             </c:choose>
@@ -186,7 +189,8 @@
         marker.setMap(map);
     }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMBgnNGsl68y8KN5ATgoj_GlvI58NFDE8&callback=myMap"></script>
+<%--PUT YOUR API KEY FOR GOOGLE MAPS--%>
+<script src="https://maps.googleapis.com/maps/api/js?key=PUT_YOUR_API_KEY&callback=myMap"></script>
 
 <script>
     $(document).ready(function () {

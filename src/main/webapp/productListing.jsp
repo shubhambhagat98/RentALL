@@ -22,7 +22,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="359199286110-ji2g5fkkf1ktpjhoadqejfprcks90vlr.apps.googleusercontent.com"/>
+    <%--    PUT YOUR GOOGLE OAUTH CLIENT ID--%>
+    <meta name="google-signin-client_id" content="PUT_YOUR_CLIENT_ID.apps.googleusercontent.com"/>
     <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
     <script type="application/javascript" src="JS/signout.js"></script>
     <script src="JS/rating.js"></script>
@@ -273,7 +274,8 @@
                                             <div class="card h-100">
                                                 <div class="card-body">
                                                     <div class="card-image-wrapper">
-                                                        <img class="card-img-top " src="https://rentallproductimage.s3.amazonaws.com/${product.prod_firstImage}"
+                                                            <%-- PUT YOUR BUCKET NAME --%>
+                                                        <img class="card-img-top " src="https://PUT_YOUR_AWS_BUCKET_NAME.s3.amazonaws.com/${product.prod_firstImage}"
                                                              alt="product image"/>
                                                     </div>
                                                     <h5 class="card-title mt-3 mb-2">${product.prod_title}</h5>
@@ -414,67 +416,6 @@
 </div>
 
 
-<%--<c:choose>--%>
-<%--    <c:when test="${not empty requestScope.recommendedProducts}">--%>
-<%--        <div class="mt-4">--%>
-<%--            <section class="product-recommendations mt-2">--%>
-<%--                <div class="container">--%>
-<%--                    <div class="title-box">--%>
-<%--                        <h2>Recommendations</h2>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </section>--%>
-<%--        </div>--%>
-<%--        <div class="display-section ">--%>
-<%--            <section class="your-listings mt-2" >--%>
-<%--                <div class="container">--%>
-<%--                    <div class="row mt-2">--%>
-<%--                        <c:choose>--%>
-<%--                            <c:when test="${not empty requestScope.recommendedProducts}">--%>
-<%--                                <c:forEach var="product" items="${requestScope.recommendedProducts}">--%>
-<%--                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-6 item mb-3">--%>
-<%--                                        <a class="product-card" href="${pageContext.request.contextPath}/ProductDetails?action=availableProduct&product_id=${product.prod_id}">--%>
-<%--                                            <div class="card h-100">--%>
-<%--                                                <div class="card-body">--%>
-<%--                                                    <div class="card-image-wrapper">--%>
-<%--                                                        <img class="card-img-top " src="https://rentallproductimage.s3.amazonaws.com/${product.prod_firstImage}"--%>
-<%--                                                             alt="product image"/>--%>
-<%--                                                    </div>--%>
-<%--                                                    <h5 class="card-title mt-3 mb-2">${product.prod_title}</h5>--%>
-<%--                                                        &lt;%&ndash;                                            <h6 class="card-subtitle text-muted">Category: ${product.prod_category}</h6>&ndash;%&gt;--%>
-<%--                                                    <h6 class="card-subtitle text-muted">Category: ${product.prod_category}</h6>--%>
-<%--                                                    <c:if test="${product.prod_rating > 0.0}">--%>
-<%--                                                        <div class="mt-2"><span class="stars" data-rating="${product.prod_rating}" data-num-stars="5" ></span></div>--%>
-<%--                                                    </c:if>--%>
-
-<%--                                                    <div class = "mt-2">--%>
-<%--                                                        <div  style="display:inline-block; vertical-align:middle;">--%>
-<%--                                                    <span class = "float-start product-price" >--%>
-<%--                                                         $${product.prod_price}.00--%>
-<%--                                                    </span>--%>
-<%--                                                        </div>--%>
-<%--                                                        <div style="display:inline-block; vertical-align:middle; float: right">--%>
-<%--                                                            <button class="btn btn-primary float-end" onclick="location.href = '${pageContext.request.contextPath}/ProductDetails?action=availableProduct&product_id=${product.prod_id}'">View</button>--%>
-<%--                                                        </div>--%>
-<%--                                                    </div>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </a>--%>
-<%--                                    </div>--%>
-<%--                                </c:forEach>--%>
-<%--                            </c:when>--%>
-<%--                            <c:otherwise>--%>
-<%--                                <div>--%>
-<%--                                    <h2>No Records to show.</h2>--%>
-<%--                                </div>--%>
-<%--                            </c:otherwise>--%>
-<%--                        </c:choose>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </section>--%>
-<%--        </div>--%>
-<%--    </c:when>--%>
-<%--</c:choose>--%>
 
 <%@ include file="chatbot.jsp" %>
 

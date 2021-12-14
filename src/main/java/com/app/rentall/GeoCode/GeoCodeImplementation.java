@@ -13,7 +13,8 @@ import java.net.URLEncoder;
 public class GeoCodeImplementation {
 
     private static final String URL = "https://maps.googleapis.com/maps/api/geocode/json";
-    private static final String API_KEY = "AIzaSyBMBgnNGsl68y8KN5ATgoj_GlvI58NFDE8";
+//    PUT YOUR GOOGLE MAP API KEY
+    private static final String API_KEY = "PUT YOUR API KEY HERE";
 
     public static LatAndLng getLatandLang(String address) throws java.io.IOException, JSONException {
 

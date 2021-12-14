@@ -2,7 +2,8 @@ function signOut() {
     window.gapi.load('auth2', () => {
         window.gapi.auth2
             .init({
-                client_id: '359199286110-ji2g5fkkf1ktpjhoadqejfprcks90vlr.apps.googleusercontent.com'
+                // PUT YOUR CLIENT ID FOR OAUTH
+                client_id: 'PUT_YOUR_CLIENT_ID.apps.googleusercontent.com'
             })
             .then(() => {
                 window.gapi.auth2

@@ -14,17 +14,17 @@ public class DBUtil {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
 
-//            String dbUrl = "jdbc:mysql://localhost:3306/rentall";
-//            String username = "root";
-//            String password = "Shivoham@8089";
+            String dbUrl = "jdbc:mysql://localhost:3306/DB_NAME";
+            String username = "root";
+            String password = "YOUR_PASSWORD";
 //
 
 
 
-            URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
-            String username = dbUri.getUserInfo().split(":")[0];
-            String password = dbUri.getUserInfo().split(":")[1];
-            String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
+//            URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
+//            String username = dbUri.getUserInfo().split(":")[0];
+//            String password = dbUri.getUserInfo().split(":")[1];
+//            String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
 
             //create connection
                 con = DriverManager.getConnection(dbUrl, username, password);
