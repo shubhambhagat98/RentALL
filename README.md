@@ -1,5 +1,7 @@
 # RentALL - Rental and Service Management System
 
+Website hosted on Heroku: https://rentall-se.herokuapp.com/index.jsp
+
 ## System Description
 
 The purpose of this project is to build a platform that communicates relavant and genuine renting information and helps the user to rent products they need and sellers to advertise their products and services. For providing the most convenient rental experience, we have tried to incorporate following features in our website.  
