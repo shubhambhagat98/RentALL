@@ -233,7 +233,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (5,'admin','admin','admin@rentall.com','7a3fad791c2fa90106c52c7dc569f3d51d6727066f71279bae39cb6141862d64',8126717382,'rentall','rentall','rentall','admin');
+INSERT INTO `user` VALUES (5,'admin','admin','admin@rentall.com','7a3fad791c2fa90106c52c7dc569f3d51d6727066f71279bae39cb6141862d64',8126516234,'rentall','rentall','rentall','admin');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
