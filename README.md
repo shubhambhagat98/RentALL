@@ -99,5 +99,5 @@ To create an admin account you can do the following steps:
 - Then, in the database, change the value of column _type_ in the _user_ table to **admin**
 
 We have already created one admin account with following credentials:
-Username: admin@Rentall123
+Username: admin@rentall.&#8203;com
 Pwd: admin@Rentall123
