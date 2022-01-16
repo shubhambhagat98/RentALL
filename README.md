@@ -1,6 +1,8 @@
 # RentALL - Rental and Service Management System
 
-Website hosted on Heroku: https://rentall-se.herokuapp.com/index.jsp
+Website hosted on Heroku: <a href="https://rentall-se.herokuapp.com/index.jsp" target="_blank">https://rentall-se.herokuapp.com/index.jsp</a>
+
+
 
 ## System Description
 
