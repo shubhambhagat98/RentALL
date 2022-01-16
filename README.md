@@ -93,4 +93,9 @@ It acts as an assistant to the user for guiding them on using the website. Users
 <br>
 
 
+## Note:
+To create an admin account you can do the following steps:
+- login by creating a user account with your admin credentials
+- Then, in the database, change the value of column _type_ in the _user_ table to **admin**
+
 
