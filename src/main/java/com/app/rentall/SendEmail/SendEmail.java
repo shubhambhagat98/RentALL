@@ -21,8 +21,8 @@ public class SendEmail {
         boolean status = false;
 
         String toEmail = user.getEmail_id();
-        String fromEmail = "rentall398@gmail.com";
-        String password = "ajaxdmrtudppsqxr";
+        String fromEmail = "Your Email ID";
+        String password = "Your Password";
 
         try {
 

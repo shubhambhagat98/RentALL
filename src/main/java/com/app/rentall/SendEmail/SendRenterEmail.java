@@ -21,8 +21,8 @@ public class SendRenterEmail {
         System.out.println("inside sendRenter email");
 
         String toEmail = renter.getEmail_id();
-        String fromEmail = "rentall398@gmail.com";
-        String password = "ajaxdmrtudppsqxr";
+        String fromEmail = "Your email id";
+        String password = "your password";
 
         try{
             // host email smtp server details
