@@ -84,11 +84,13 @@ This is a personalized dashboard for every user. Here the user can view list of 
 <br>
 
 **6) Chatbot**
-It acts as an assistant to the user for guiding them on using the website. Users can ask different questions and chatbot can reply with appropriate answers. 
 
+It acts as an assistant to the user for guiding them on using the website. Users can ask different questions and chatbot can reply with appropriate answers. 
 
 <div align="center">
   <img src="https://user-images.githubusercontent.com/53030762/149642592-e42a311e-532c-4039-b71a-4bdfd7391635.png" width="600"/>
 </div>
 <br>
+
+
 
