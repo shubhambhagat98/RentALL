@@ -54,9 +54,10 @@ This component will display all the details of the product such as product image
 **Note:** The Payment form is just a dummy form. We haven't implemented an actual payment form. This is just for simulating payment process and then adding the product to the users renting list. 
 
 <div align="center">
-  <img src="https://user-images.githubusercontent.com/53030762/149642739-c4d94119-f1d4-4b14-a858-772c4fbcf618.png" width="750"/>
+  <img src="https://user-images.githubusercontent.com/53030762/149642757-5d8c1a7c-1cfd-4267-96d8-5151b0c3b71a.png" width="750"/>
 </div>
 <br>
+
 
 
 **4) Chat Messaging**
