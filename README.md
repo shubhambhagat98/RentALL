@@ -23,6 +23,14 @@ The purpose of this project is to build a platform that communicates relavant an
 - Database: MySQL
 - Third Party Cloud Storage: Amazon S3 Buckets
 
+## Demo
+
+
+
+https://user-images.githubusercontent.com/53030762/202829110-066a77cf-04e3-4d0c-8cf0-79dfb4b80f72.mp4
+
+
+
 ## Component Overview
 
 **1) User Registration and Sign-in**
