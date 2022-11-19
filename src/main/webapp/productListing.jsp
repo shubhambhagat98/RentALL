@@ -20,11 +20,7 @@
     <link rel="stylesheet" href="CSS/style.css">
     <%--   google OAuth files--%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-scope" content="profile email">
-    <%--    PUT YOUR GOOGLE OAUTH CLIENT ID--%>
-    <meta name="google-signin-client_id" content="PUT_YOUR_CLIENT_ID.apps.googleusercontent.com"/>
-    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script type="application/javascript" src="JS/signout.js"></script>
     <script src="JS/rating.js"></script>
     <script src="JS/filterReset.js"></script>

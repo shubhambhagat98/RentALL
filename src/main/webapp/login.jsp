@@ -19,11 +19,7 @@
     <link rel="stylesheet" href="CSS/style.css">
     <%--   google OAuth files--%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-scope" content="profile email">
-    <%--    PUT YOUR GOOGLE OAUTH CLIENT ID--%>
-    <meta name="google-signin-client_id" content="PUT_YOUR_CLIENT_ID.apps.googleusercontent.com"/>
-    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script type="application/javascript" src="JS/signin.js"></script>
     <script type="text/javascript" src="JS/loginValidation.js" ></script>
 
@@ -64,7 +60,14 @@
                 <div class="mt-2 d-grid px-3"> <button class="btn btn-primary btn-block btn-signup text-uppercase" type="submit">
                     <span>Submit</span> </button>
                 </div>
-                <div class="mt-4"> <span style="display:inline-block; vertical-align:middle;">Sign up using: </span> <div class="g-signin2" data-prompt="select_account" data-onsuccess="onSignIn" style="display:inline-block; vertical-align:middle;"></div> </div>
+                <div id="g_id_onload"
+                     data-client_id="PUT_YOUR_GOOGLE_OAUTH_CLIENT_ID.apps.googleusercontent.com"
+                     data-context="signin"
+                     data-ux_mode="popup"
+                     data-callback="onSignIn"
+                     data-auto_prompt="false">
+                </div>
+                <div class="mt-4"> <span style="display:inline-block; vertical-align:middle;">Sign up using: </span> <div class="g_id_signin" data-type="standard" style="display:inline-block; vertical-align:middle;"></div> </div>
                 <div class="mt-4"> <span>Create an account?</span> <a href="signup.jsp" class="text-decoration-none">Sign-Up</a> </div>
 
             </div>

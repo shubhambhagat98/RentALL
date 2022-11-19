@@ -58,7 +58,7 @@
                                 <a class="nav-link " href="${pageContext.request.contextPath}/MyAccount">Account</a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="#" onclick="signOut();">Logout</a>
+                                <a class="nav-link " href="${pageContext.request.contextPath}/DBLogout">Logout</a>
                             </li>
                         </c:when>
                         <c:otherwise>
