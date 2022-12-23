@@ -112,7 +112,7 @@
 
                     <c:when test="${ (not empty sessionScope.user_id) and (sessionScope.type == 'GoogleLogin')}">
                         <a class="nav-link " href="${pageContext.request.contextPath}/MyAccount">Account</a>
-                        <a class="nav-link " href="#" onclick="signOut();">Logout</a>
+                        <a class="nav-link " href="${pageContext.request.contextPath}/DBLogout">Logout</a>
                     </c:when>
                     <c:otherwise>
                         <a class="nav-link " href="login.jsp">Login</a>
