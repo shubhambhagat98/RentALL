@@ -24,64 +24,19 @@ function ajaxCall() {
 }
 
 function locationInfo1() {
-    var rootUrl = "//geodata.solutions/api/api.php";
-    //set default values
-    var username = 'demo';
-    var ordering = 'name';
-    //now check for set values
-    var addParams = '';
-    if(jQuery("#gds_appid").length > 0) {
-        addParams += '&appid=' + jQuery("#gds_appid").val();
-    }
-    if(jQuery("#gds_hash").length > 0) {
-        addParams += '&hash=' + jQuery("#gds_hash").val();
-    }
-
+    var rootUrl = "https://geodata.phplift.net/api/index.php";
     var call = new ajaxCall();
 
-    this.confCity = function(id) {
-        var url = rootUrl+'?type=confCity&countryId='+ jQuery('#countryId1').val() + '&stateId=' + jQuery('#stateId1 option:selected').attr('stateid') + '&cityId=' + id;
-        var method = "post";
-        var data = {};
-        call.send(data, url, method, function(data) {
-            if(data){
-                //    alert(data);
-            }
-            else{
-                //   alert('No data');
-            }
-        });
-    };
 
-    this.getCities = function(id) {
+    this.getCities = function(id,selectedCity) {
         jQuery(".cities1 option:gt(0)").remove();
-        //get additional fields
-        var stateClasses = jQuery('#cityId1').attr('class');
-        //console.log(stateClasses);
-        var cC = stateClasses.split(" ");
-        cC.shift();
-        var addClasses = '';
-        if(cC.length > 0)
-        {
-            acC = cC.join();
-            addClasses = '&addClasses=' + encodeURIComponent(acC);
-        }
-        var url = rootUrl+'?type=getCities&countryId='+ jQuery('#countryId1').val() +'&stateId=' + id + addParams + addClasses;
+
+        var url = rootUrl+'?type=getCities&countryId='+ '&stateId=' + id;
         var method = "post";
         var data = {};
         jQuery('.cities1').find("option:eq(0)").html("Please wait..");
         call.send(data, url, method, function(data) {
             jQuery('.cities1').find("option:eq(0)").html("Select City");
-            if(data.tp == 1){
-                if(data.hits > 1000)
-                {
-                    //alert('Free usage far exceeded. Please subscribe at geodata.solutions.');
-                    console.log('Daily geodata.solutions request limit exceeded:' + data.hits + ' of 1000');
-                }
-                else
-                {
-                    console.log('Daily geodata.solutions request count:' + data.hits + ' of 1000')
-                }
 
                 var listlen = Object.keys(data['result']).length;
                 //console.log('number is cities is ' + listlen);
@@ -90,7 +45,12 @@ function locationInfo1() {
                     jQuery.each(data['result'], function(key, val) {
 
                         var option = jQuery('<option />');
-                        option.attr('value', val).text(val);
+                        option.attr('value', val.name).text(val.name);
+
+                        // Set the selected property for the matching city
+                        if (selectedCity === val.name) {
+                            option.attr('selected', 'selected');
+                        }
                         jQuery('.cities1').append(option);
                     });
                 }
@@ -104,76 +64,76 @@ function locationInfo1() {
                 }
 
                 jQuery(".cities1").prop("disabled",false);
-            }
-            else{
-                alert(data.msg);
-            }
+
         });
     };
 
-    this.getStates = function(id) {
+    this.getStates = function(id, selectedState) {
         jQuery(".states1 option:gt(0)").remove();
         jQuery(".cities1 option:gt(0)").remove();
-        //get additional fields
-        var stateClasses = jQuery('#stateId1').attr('class');
-        console.log(stateClasses);
-        console.log(jQuery('#stateId1').val())
-        var cC = stateClasses.split(" ");
-        cC.shift();
-        var addClasses = '';
-        if(cC.length > 0)
-        {
-            acC = cC.join();
-            addClasses = '&addClasses=' + encodeURIComponent(acC);
-        }
-        var url = rootUrl+'?type=getStates&countryId=' + id + addParams  + addClasses;
+
+
+        var url = rootUrl+'?type=getStates&countryId=' + id;
         var method = "post";
         var data = {};
         jQuery('.states1').find("option:eq(0)").html("Please wait..");
         call.send(data, url, method, function(data) {
             jQuery('.states1').find("option:eq(0)").html("Select State");
-            if(data.tp == 1){
-                if(data.hits > 1000)
-                {
-                    //alert('Free usage far exceeded. Please subscribe at geodata.solutions.');
-                    console.log('Daily geodata.solutions request limit exceeded: ' + data.hits + ' of 1000.');
+
+            // Sort the states data based on state name
+            data['result'].sort(function(a, b) {
+                var stateA = a.name.toUpperCase();
+                var stateB = b.name.toUpperCase();
+                if (stateA < stateB) {
+                    return -1;
                 }
-                else
-                {
-                    console.log('Daily geodata.solutions request count:' + data.hits + ' of 1000')
+                if (stateA > stateB) {
+                    return 1;
                 }
+                return 0;
+            });
+
                 jQuery.each(data['result'], function(key, val) {
                     var option = jQuery('<option />');
-                    option.attr('value', val).text(val);
-                    option.attr('stateid', key);
+                    option.attr('value', val.name).text(val.name);
+                    option.attr('stateid', val.id);
+                    // Set the selected property for the matching state
+                    if (selectedState === val.name) {
+                        option.attr('selected', 'selected');
+
+                    }
                     jQuery('.states1').append(option);
                 });
                 jQuery(".states1").prop("disabled",false);
-            }
-            else{
-                alert(data.msg);
-            }
+
+            // Trigger change event on states dropdown
+            jQuery(".states1").trigger("change");
+
         });
     };
 }
 
 jQuery(function() {
     var loc = new locationInfo1();
-    var coid = jQuery("#countryId1").val();
-    loc.getStates(coid);
+    var coid = jQuery("#countryIdNum").val();
+
+    var selectedState = jQuery(".states1").data("selected");
+    var selectedCity = jQuery(".cities1").data("selected");
+
+    loc.getStates(coid, selectedState);
     jQuery(".states1").on("change", function(ev) {
         var stateId = jQuery("option:selected", this).attr('stateid');
-        if(stateId != ''){
-            loc.getCities(stateId);
+        if(stateId !== '' && stateId !== undefined){
+            loc.getCities(stateId, selectedCity);
         }
         else{
             jQuery(".cities1 option:gt(0)").remove();
         }
     });
-    jQuery(".cities1").on("change", function(ev) {
-        var cityId = jQuery("option:selected", this).val();
-        if(cityId != ''){
-            loc.confCity(cityId);
-        }
-    });
+    // jQuery(".cities1").on("change", function(ev) {
+    //     var cityId = jQuery("option:selected", this).val();
+    //     if(cityId != ''){
+    //         loc.confCity(cityId);
+    //     }
+    // });
 });

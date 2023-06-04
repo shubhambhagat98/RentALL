@@ -33,6 +33,8 @@
 
 <div class="signup-body-background ">
     <div class="container signup-form-div mt-5 mb-5" >
+        <input type="hidden" name="country" id="countryId" value="US" />
+        <input type="hidden" name="countryId" id="countryIdNum" value="233" />
         <form name="addProduct" action="${pageContext.request.contextPath}/AddProduct1" method="post" onsubmit="return addProductValidate()" enctype="multipart/form-data">
             <div class="card p-3 text-center py-4"  ><!-- style="width: 35rem;" -->
                 <div class="mb-2">
@@ -104,7 +106,7 @@
                     </div>
                 </div>
                 <div class="form-outline mb-2 row g-2">
-                    <input type="hidden" name="country" id="countryId" value="US"/>
+
                     <div class="col-md-4">
                         <select class="form-select states order-alpha" name="state" id="stateId" >
                             <option value="">Select State</option>
@@ -164,7 +166,7 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-<script src="//geodata.solutions/includes/statecity.js"></script>
+<script src="JS/stateCity2.js"></script>
 <c:if test="${(not empty sessionScope.addProductError) and (sessionScope.addProductError == true)}">
     <script>
         document.getElementById("errorMessage").innerHTML = "There was some error, please try again...";
@@ -173,15 +175,15 @@
 </c:if>
 
 
-<script type="application/javascript">
-    jQuery(".states").change(function () {
-        console.log($(this).val())
-    });
+<%--<script type="application/javascript">--%>
+<%--    jQuery(".states").change(function () {--%>
+<%--        console.log($(this).val())--%>
+<%--    });--%>
 
-    jQuery(".cities").change(function () {
-        console.log($(this).val())
-    });
-</script>
+<%--    jQuery(".cities").change(function () {--%>
+<%--        console.log($(this).val())--%>
+<%--    });--%>
+<%--</script>--%>
 
 
 
@@ -203,7 +205,7 @@
         // Update of the files of the input file after addition
         this.files = dt.files;
 
-       // EventListener for the delete button
+        // EventListener for the delete button
         $('span.file-delete').click(function(){
             let name = $(this).next('span.name').text();
             // Suppress display of file name

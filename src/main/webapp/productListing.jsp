@@ -109,10 +109,10 @@
         <div class="page-header">
             <div class="container">
                 <h2>Explore Products</h2>
-<%--                <ul>--%>
-<%--                    <li><a class="nav-link" href="viewProfile.jsp">View Profile</a></li>--%>
-<%--                    <li><a class="nav-link" href="addProduct.jsp">Add Product</a></li>--%>
-<%--                </ul>--%>
+                <%--                <ul>--%>
+                <%--                    <li><a class="nav-link" href="viewProfile.jsp">View Profile</a></li>--%>
+                <%--                    <li><a class="nav-link" href="addProduct.jsp">Add Product</a></li>--%>
+                <%--                </ul>--%>
             </div>
         </div>
     </div>
@@ -128,6 +128,8 @@
                             <h4>Filters</h4>
                             <hr>
                             <div class="mt-2">
+                                <input type="hidden" name="country" id="countryId" value="US" />
+                                <input type="hidden" name="countryId" id="countryIdNum" value="233" />
                                 <form action="${pageContext.request.contextPath}/SearchProduct" method="get">
 
                                     <input type="hidden" name="category" value="${requestScope.category}">
@@ -136,15 +138,15 @@
 
                                     <div class="form-outline mb-4 row g-2">
                                         <label  class="form-label mb-0" >Product Location</label>
-                                        <input type="hidden" name="country" id="countryId" value="US"/>
+
                                         <div class="col-md-6">
-                                            <select class="form-select states order-alpha" name="state" id="stateId" >
-                                                <option value="${requestScope.state}">State</option>
+                                            <select class="form-select states order-alpha" name="state" id="stateId"  data-selected="${requestScope.state}" >
+                                                <option value="" >State</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
-                                            <select name="city" class="form-select cities order-alpha" id="cityId">
-                                                <option value="${requestScope.city}">City</option>
+                                            <select name="city" class="form-select cities order-alpha" id="cityId" data-selected="${requestScope.city}" >
+                                                <option value="" >City</option>
                                             </select>
                                         </div>
                                     </div>
@@ -270,8 +272,7 @@
                                             <div class="card h-100">
                                                 <div class="card-body">
                                                     <div class="card-image-wrapper">
-                                                            <%-- PUT YOUR BUCKET NAME --%>
-                                                        <img class="card-img-top " src="https://PUT_YOUR_AWS_BUCKET_NAME.s3.amazonaws.com/${product.prod_firstImage}"
+                                                        <img class="card-img-top " src="https://rentallproductimage.s3.amazonaws.com/${product.prod_firstImage}"
                                                              alt="product image"/>
                                                     </div>
                                                     <h5 class="card-title mt-3 mb-2">${product.prod_title}</h5>
@@ -315,6 +316,8 @@
 <div class="modal fade" id="FilterModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
+            <input type="hidden" name="country" id="countryId1" value="US" />
+            <input type="hidden" name="countryId" id="countryIdNum1" value="233" />
             <form action="${pageContext.request.contextPath}/SearchProduct" method="get">
                 <div class="modal-header">
                     <h5 class="modal-title" id="AddComplaintTitle">Filter</h5>
@@ -327,15 +330,15 @@
 
                     <div class="form-outline mb-4 row g-2">
                         <label  class="form-label mb-0" >Product Location</label>
-                        <input type="hidden" name="country" id="countryId1" value="US"/>
+
                         <div class="col-md-6">
-                            <select class="form-select states1 order-alpha" name="state" id="stateId1" >
-                                <option value="${requestScope.state}">State</option>
+                            <select class="form-select states1 order-alpha" name="state" id="stateId1" data-selected="${requestScope.state}" >
+                                <option value="">State</option>
                             </select>
                         </div>
                         <div class="col-md-6">
-                            <select name="city" class="form-select cities1 order-alpha" id="cityId1">
-                                <option value="${requestScope.city}">City</option>
+                            <select name="city" class="form-select cities1 order-alpha" id="cityId1" data-selected="${requestScope.city}" >
+                                <option value="">City</option>
                             </select>
                         </div>
                     </div>
@@ -412,6 +415,67 @@
 </div>
 
 
+<%--<c:choose>--%>
+<%--    <c:when test="${not empty requestScope.recommendedProducts}">--%>
+<%--        <div class="mt-4">--%>
+<%--            <section class="product-recommendations mt-2">--%>
+<%--                <div class="container">--%>
+<%--                    <div class="title-box">--%>
+<%--                        <h2>Recommendations</h2>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </section>--%>
+<%--        </div>--%>
+<%--        <div class="display-section ">--%>
+<%--            <section class="your-listings mt-2" >--%>
+<%--                <div class="container">--%>
+<%--                    <div class="row mt-2">--%>
+<%--                        <c:choose>--%>
+<%--                            <c:when test="${not empty requestScope.recommendedProducts}">--%>
+<%--                                <c:forEach var="product" items="${requestScope.recommendedProducts}">--%>
+<%--                                    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3 col-6 item mb-3">--%>
+<%--                                        <a class="product-card" href="${pageContext.request.contextPath}/ProductDetails?action=availableProduct&product_id=${product.prod_id}">--%>
+<%--                                            <div class="card h-100">--%>
+<%--                                                <div class="card-body">--%>
+<%--                                                    <div class="card-image-wrapper">--%>
+<%--                                                        <img class="card-img-top " src="https://rentallproductimage.s3.amazonaws.com/${product.prod_firstImage}"--%>
+<%--                                                             alt="product image"/>--%>
+<%--                                                    </div>--%>
+<%--                                                    <h5 class="card-title mt-3 mb-2">${product.prod_title}</h5>--%>
+<%--                                                        &lt;%&ndash;                                            <h6 class="card-subtitle text-muted">Category: ${product.prod_category}</h6>&ndash;%&gt;--%>
+<%--                                                    <h6 class="card-subtitle text-muted">Category: ${product.prod_category}</h6>--%>
+<%--                                                    <c:if test="${product.prod_rating > 0.0}">--%>
+<%--                                                        <div class="mt-2"><span class="stars" data-rating="${product.prod_rating}" data-num-stars="5" ></span></div>--%>
+<%--                                                    </c:if>--%>
+
+<%--                                                    <div class = "mt-2">--%>
+<%--                                                        <div  style="display:inline-block; vertical-align:middle;">--%>
+<%--                                                    <span class = "float-start product-price" >--%>
+<%--                                                         $${product.prod_price}.00--%>
+<%--                                                    </span>--%>
+<%--                                                        </div>--%>
+<%--                                                        <div style="display:inline-block; vertical-align:middle; float: right">--%>
+<%--                                                            <button class="btn btn-primary float-end" onclick="location.href = '${pageContext.request.contextPath}/ProductDetails?action=availableProduct&product_id=${product.prod_id}'">View</button>--%>
+<%--                                                        </div>--%>
+<%--                                                    </div>--%>
+<%--                                                </div>--%>
+<%--                                            </div>--%>
+<%--                                        </a>--%>
+<%--                                    </div>--%>
+<%--                                </c:forEach>--%>
+<%--                            </c:when>--%>
+<%--                            <c:otherwise>--%>
+<%--                                <div>--%>
+<%--                                    <h2>No Records to show.</h2>--%>
+<%--                                </div>--%>
+<%--                            </c:otherwise>--%>
+<%--                        </c:choose>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </section>--%>
+<%--        </div>--%>
+<%--    </c:when>--%>
+<%--</c:choose>--%>
 
 <%@ include file="chatbot.jsp" %>
 
@@ -424,13 +488,16 @@
 <script src="JS/stateCity.js"></script>
 <script src="JS/stateCity1.js"></script>
 <script type="application/javascript">
-    jQuery(".states").change(function () {
-        console.log($(this).val())
-    });
+    // jQuery(".states").change(function () {
+    //     console.log($(this).val())
+    // });
+    //
+    // jQuery(".cities").change(function () {
+    //     console.log($(this).val())
+    // });
 
-    jQuery(".cities").change(function () {
-        console.log($(this).val())
-    });
+    <%--console.log("selected state: ", '${requestScope.state}');--%>
+    <%--console.log("selected city: ", '${requestScope.city}' )--%>
 </script>
 </body>
 </html>
